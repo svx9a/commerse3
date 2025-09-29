@@ -1,0 +1,33 @@
+# Non-Shopify Theme Files
+*.md
+*.html
+!layout/*.liquid
+!sections/*.liquid
+!templates/*.liquid
+
+# Demo and Test Files
+index.html
+accessibility-audit.html
+ai-chat-interface.html
+chat-integration.html
+functional-validation-test.html
+glossy-polarize-demo.html
+production-audit.html
+test-3d-integration.html
+test-3d-simple.html
+
+# Documentation
+DEPLOYMENT_SUMMARY.md
+browser-compatibility-report.md
+code-quality-report.md
+dependency-audit-report.md
+production-deployment-checklist.md
+security-audit-report.md
+
+# Development files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+node_modules/
