@@ -13,6 +13,9 @@
 
   .partners-{{ section.id }} {
     background: rgb(var(--color-base-background-2));
+    --logo-opacity: {{ section.settings.logo_opacity | default: 0.7 }};
+    --logo-scale: {{ section.settings.hover_scale | default: 1.05 }};
+    --animation-duration: 0.3s;
   }
 
   .partners-{{ section.id }} .partners__header {
@@ -40,6 +43,14 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
     align-items: center;
+    opacity: 0;
+    animation: fadeIn-{{ section.id }} 0.5s ease forwards;
+  }
+
+  @keyframes fadeIn-{{ section.id }} {
+    to {
+      opacity: 1;
+    }
   }
 
   .partners-{{ section.id }} .partner-logo {
@@ -51,15 +62,17 @@
     border: 1px solid rgba(var(--color-base-text), 0.05);
     border-radius: 0.5rem;
     min-height: 120px;
-    transition: all 0.3s ease;
-    opacity: 0.7;
+    transition: all var(--animation-duration) ease;
+    opacity: var(--logo-opacity);
   }
 
+  {%- if section.settings.enable_hover_effect -%}
   .partners-{{ section.id }} .partner-logo:hover {
     opacity: 1;
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(var(--logo-scale));
     box-shadow: 0 10px 30px rgba(var(--color-base-text), 0.1);
   }
+  {%- endif -%}
 
   /* Enhanced logo styling for better brand recognition */
   .partners-{{ section.id }} .partner-logo svg {
@@ -82,8 +95,13 @@
     width: auto;
     height: auto;
     object-fit: contain;
+    {%- if section.settings.enable_grayscale -%}
     filter: grayscale(100%) opacity(0.6);
-    transition: filter 0.3s ease;
+    {%- else -%}
+    filter: opacity(0.6);
+    {%- endif -%}
+    transition: filter var(--animation-duration) ease;
+    loading: lazy;
   }
 
   .partners-{{ section.id }} .partner-logo:hover img {
@@ -95,7 +113,7 @@
     font-weight: 600;
     color: rgba(var(--color-base-text), 0.6);
     text-align: center;
-    transition: color 0.3s ease;
+    transition: color var(--animation-duration) ease;
   }
 
   .partners-{{ section.id }} .partner-logo:hover .partner-logo__text {
@@ -111,7 +129,7 @@
   .partners-{{ section.id }} .partners__marquee-content {
     display: inline-flex;
     align-items: center;
-    animation: marquee 30s linear infinite;
+    animation: marquee-{{ section.id }} 30s linear infinite;
     gap: 4rem;
   }
 
@@ -123,7 +141,7 @@
     padding: 1rem;
   }
 
-  @keyframes marquee {
+  @keyframes marquee-{{ section.id }} {
     0% {
       transform: translateX(0);
     }
@@ -159,6 +177,25 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
     font-weight: 500;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .partners-{{ section.id }} .partners__grid {
+      animation: none;
+      opacity: 1;
+    }
+    
+    .partners-{{ section.id }} .partner-logo:hover {
+      transform: none;
+    }
+    
+    .partners-{{ section.id }} .partners__marquee-content {
+      animation: none;
+      justify-content: center;
+      flex-wrap: wrap;
+      white-space: normal;
+    }
   }
 
   @media screen and (max-width: 749px) {
@@ -203,6 +240,10 @@
           </div>
         {%- endif -%}
       </div>
+    {%- else -%}
+      <div class="visually-hidden">
+        <h2>Our Partners</h2>
+      </div>
     {%- endif -%}
 
     {%- if section.blocks.size > 0 -%}
@@ -212,18 +253,31 @@
             {%- when 'partner_logo' -%}
               <div class="partner-logo{% if block.settings.featured %} featured{% endif %}" {{ block.shopify_attributes }}>
                 {%- if block.settings.logo != blank -%}
+                  {%- liquid
+                    assign logo_width = block.settings.logo_width | default: 200
+                    assign logo_height = logo_width | divided_by: block.settings.logo.aspect_ratio | round
+                  -%}
+                  
                   {%- if block.settings.partner_link != blank -%}
                     <a href="{{ block.settings.partner_link }}" 
-                       {% if block.settings.link_new_tab %}target="_blank" rel="noopener"{% endif %}
-                       title="{{ block.settings.partner_name | escape }}">
+                       class="partner-logo__link"
+                       {% if block.settings.link_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+                       aria-label="Visit {{ block.settings.partner_name | default: block.settings.logo.alt | escape }}">
                   {%- endif -%}
+                  
                   <img
-                    src="{{ block.settings.logo | image_url: width: 200 }}"
+                    src="{{ block.settings.logo | image_url: width: logo_width }}"
+                    srcset="
+                      {{ block.settings.logo | image_url: width: logo_width }} 1x,
+                      {{ block.settings.logo | image_url: width: logo_width | times: 2 }} 2x
+                    "
                     alt="{{ block.settings.logo.alt | default: block.settings.partner_name | escape }}"
                     loading="lazy"
-                    width="{{ block.settings.logo.width }}"
-                    height="{{ block.settings.logo.height }}"
+                    width="{{ logo_width }}"
+                    height="{{ logo_height }}"
+                    style="max-width: {{ logo_width }}px;"
                   >
+                  
                   {%- if block.settings.partner_link != blank -%}
                     </a>
                   {%- endif -%}
@@ -231,33 +285,33 @@
                   {%- assign partner_name = block.settings.partner_name | downcase -%}
                   
                   {%- if partner_name contains 'shopify' -%}
-                    <svg width="120" height="40" viewBox="0 0 120 40" fill="currentColor">
+                    <svg width="120" height="40" viewBox="0 0 120 40" fill="currentColor" aria-label="Shopify">
                       <path d="M25.5 8.2c-.2 0-.4 0-.7.1-.2-.6-.5-1.1-.9-1.5-.9-.9-2.2-1.3-3.8-1.1-.1 0-.2 0-.3.1-.1-.1-.2-.2-.3-.3-1.1-1.1-2.8-1.6-4.9-.9-3.2 1-6.2 3.8-8.5 7.8-1.6 2.8-3 5.9-3 8.2 0 .1 0 .2.1.3L8.5 32c.1.4.4.7.8.7h11.2c.5 0 .9-.4.9-.9V20.5c0-.3.2-.5.5-.5s.5.2.5.5v11.3c0 .5.4.9.9.9h2.8c.5 0 .9-.4.9-.9V8.9c0-.4-.3-.7-.7-.7zm-5.8 4.3c-.8.3-1.7.4-2.6.4s-1.8-.1-2.6-.4c.8-1.4 1.8-2.6 2.6-3.2.8.6 1.8 1.8 2.6 3.2z"/>
                       <text x="35" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="currentColor">Shopify</text>
                     </svg>
                   
                   {%- elsif partner_name contains 'google' -%}
-                    <svg width="120" height="40" viewBox="0 0 120 40" fill="currentColor">
+                    <svg width="120" height="40" viewBox="0 0 120 40" fill="currentColor" aria-label="Google Cloud">
                       <path d="M15 12c-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3zm0 4.5c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5z"/>
                       <path d="M25 10h-4c-.6 0-1 .4-1 1v2h-3c-2.8 0-5 2.2-5 5v7c0 2.8 2.2 5 5 5h8c2.8 0 5-2.2 5-5v-10c0-2.8-2.2-5-5-5zm3 15c0 1.7-1.3 3-3 3h-8c-1.7 0-3-1.3-3-3v-7c0-1.7 1.3-3 3-3h8c1.7 0 3 1.3 3 3v7z"/>
                       <text x="35" y="25" font-family="Arial, sans-serif" font-size="12" font-weight="600" fill="currentColor">Google Cloud</text>
                     </svg>
                   
                   {%- elsif partner_name contains 'aws' -%}
-                    <svg width="120" height="40" viewBox="0 0 120 40" fill="currentColor">
+                    <svg width="120" height="40" viewBox="0 0 120 40" fill="currentColor" aria-label="Amazon Web Services">
                       <path d="M20.5 15.5c0-2.5-1.5-4.5-4-5.5v-1c0-.6-.4-1-1-1s-1 .4-1 1v1c-2.5 1-4 3-4 5.5s1.5 4.5 4 5.5v6c0 .6.4 1 1 1s1-.4 1-1v-6c2.5-1 4-3 4-5.5zm-6 3.5c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5z"/>
                       <path d="M8 25h16c.6 0 1-.4 1-1s-.4-1-1-1H8c-.6 0-1 .4-1 1s.4 1 1 1z"/>
                       <text x="30" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="currentColor">AWS</text>
                     </svg>
                   
                   {%- elsif partner_name contains 'stripe' -%}
-                    <svg width="120" height="40" viewBox="0 0 120 40" fill="currentColor">
+                    <svg width="120" height="40" viewBox="0 0 120 40" fill="currentColor" aria-label="Stripe">
                       <path d="M18 14c-1.1 0-1.8.6-1.8 1.5 0 2.3 6.8 1.5 6.8 6.5 0 3.2-2.4 5-5.8 5-2.5 0-4.8-1-6.2-2.7l1.5-2.5c1.2 1.4 2.8 2.2 4.7 2.2 1.3 0 2.1-.6 2.1-1.6 0-2.6-6.8-1.7-6.8-6.4 0-3 2.3-4.8 5.5-4.8 2.2 0 4.2.8 5.5 2.2l-1.5 2.4c-1-1.1-2.3-1.8-4-1.8z"/>
                       <text x="30" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="currentColor">Stripe</text>
                     </svg>
                   
                   {%- elsif partner_name contains 'klaviyo' -%}
-                    <svg width="120" height="40" viewBox="0 0 120 40" fill="currentColor">
+                    <svg width="120" height="40" viewBox="0 0 120 40" fill="currentColor" aria-label="Klaviyo">
                       <path d="M8 10h3v8l6-8h4l-6 8 6 10h-4l-4-7-2 2v5H8V10z"/>
                       <path d="M25 10h3v18h-3V10z"/>
                       <path d="M32 18c0-3.3 2.7-6 6-6s6 2.7 6 6-2.7 6-6 6-6-2.7-6-6zm3 0c0 1.7 1.3 3 3 3s3-1.3 3-3-1.3-3-3-3-3 1.3-3 3z"/>
@@ -265,19 +319,19 @@
                     </svg>
                   
                   {%- elsif partner_name contains 'meta' or partner_name contains 'facebook' -%}
-                    <svg width="120" height="40" viewBox="0 0 120 40" fill="currentColor">
+                    <svg width="120" height="40" viewBox="0 0 120 40" fill="currentColor" aria-label="Meta">
                       <path d="M20 8c-6.6 0-12 5.4-12 12s5.4 12 12 12c6.6 0 12-5.4 12-12S26.6 8 20 8zm3 12h-2v8h-3v-8h-1v-2h1v-1.5c0-2.5 1-4 4-4h2v2h-1.5c-.8 0-1.5.5-1.5 1.5V18h3l-.5 2z"/>
                       <text x="38" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="currentColor">Meta</text>
                     </svg>
                   
                   {%- elsif partner_name contains 'mailchimp' -%}
-                    <svg width="120" height="40" viewBox="0 0 120 40" fill="currentColor">
+                    <svg width="120" height="40" viewBox="0 0 120 40" fill="currentColor" aria-label="Mailchimp">
                       <path d="M20 8c-6.6 0-12 5.4-12 12s5.4 12 12 12 12-5.4 12-12S26.6 8 20 8zm-2 18c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm4-6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
                       <text x="38" y="25" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="currentColor">Mailchimp</text>
                     </svg>
                   
                   {%- elsif partner_name contains 'trae' -%}
-                    <svg width="100" height="40" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="100" height="40" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Trae">
                       <defs>
                         <linearGradient id="traeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                           <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
@@ -307,7 +361,7 @@
                     </svg>
                   
                   {%- else -%}
-                    <span>{{ block.settings.partner_name | escape }}</span>
+                    <span class="partner-logo__text">{{ block.settings.partner_name | escape }}</span>
                   {%- endif -%}
                 {%- endif -%}
               </div>
@@ -315,5 +369,170 @@
         {%- endfor -%}
       </div>
     {%- endif -%}
+  </div>
+</div>
 
-    <!-- ... existing code ... -->
+{% schema %}
+{
+  "name": "Partners Showcase",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "Trusted by Industry Leaders",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "default": "<p>We partner with the world's most innovative companies to deliver exceptional results.</p>",
+      "label": "Subheading"
+    },
+    {
+      "type": "color_scheme",
+      "id": "section_color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "logo_max_width",
+      "min": 100,
+      "max": 300,
+      "step": 10,
+      "default": 200,
+      "label": "Logo max width"
+    },
+    {
+      "type": "range",
+      "id": "logo_opacity",
+      "min": 0.1,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.7,
+      "label": "Logo opacity"
+    },
+    {
+      "type": "range",
+      "id": "hover_scale",
+      "min": 1,
+      "max": 1.2,
+      "step": 0.1,
+      "default": 1.1,
+      "label": "Hover scale effect"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_grayscale",
+      "default": true,
+      "label": "Enable grayscale effect"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_hover_effect",
+      "default": true,
+      "label": "Enable hover effects"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "partner_logo",
+      "name": "Partner Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo image"
+        },
+        {
+          "type": "text",
+          "id": "partner_name",
+          "label": "Partner name",
+          "info": "Required if no logo image is selected. Used for text fallback and SVG generation."
+        },
+        {
+          "type": "url",
+          "id": "partner_link",
+          "label": "Partner link"
+        },
+        {
+          "type": "checkbox",
+          "id": "link_new_tab",
+          "default": true,
+          "label": "Open link in new tab"
+        },
+        {
+          "type": "checkbox",
+          "id": "featured",
+          "default": false,
+          "label": "Featured partner",
+          "info": "Applies special styling to highlight this partner"
+        },
+        {
+          "type": "range",
+          "id": "logo_width",
+          "min": 100,
+          "max": 300,
+          "step": 10,
+          "default": 200,
+          "label": "Custom logo width",
+          "info": "Override the default logo width for this specific logo"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Partners Showcase",
+      "blocks": [
+        {
+          "type": "partner_logo",
+          "settings": {
+            "partner_name": "Shopify"
+          }
+        },
+        {
+          "type": "partner_logo",
+          "settings": {
+            "partner_name": "Google Cloud"
+          }
+        },
+        {
+          "type": "partner_logo",
+          "settings": {
+            "partner_name": "AWS"
+          }
+        },
+        {
+          "type": "partner_logo",
+          "settings": {
+            "partner_name": "Stripe"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
