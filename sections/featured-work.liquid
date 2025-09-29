@@ -1,0 +1,807 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .featured-work-{{ section.id }} {
+    background: rgb(var(--color-base-background-1));
+  }
+
+  .featured-work-{{ section.id }} .work__header {
+    text-align: center;
+    margin-bottom: 6rem;
+  }
+
+  .featured-work-{{ section.id }} .work__title {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: rgb(var(--color-base-text));
+  }
+
+  .featured-work-{{ section.id }} .work__subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: rgba(var(--color-base-text), 0.8);
+    max-width: 60rem;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .featured-work-{{ section.id }} .work__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+  }
+
+  .featured-work-{{ section.id }} .work-item {
+    position: relative;
+    aspect-ratio: 4/3;
+    border-radius: 1rem;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .featured-work-{{ section.id }} .work-item:hover {
+    transform: scale(1.02);
+  }
+
+  .featured-work-{{ section.id }} .work-item__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .featured-work-{{ section.id }} .work-item:hover .work-item__image {
+    transform: scale(1.1);
+  }
+
+  .featured-work-{{ section.id }} .work-item__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(0, 0, 0, 0.8) 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .featured-work-{{ section.id }} .work-item:hover .work-item__overlay {
+    opacity: 1;
+  }
+
+  .featured-work-{{ section.id }} .work-item__category {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .featured-work-{{ section.id }} .work-item__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .featured-work-{{ section.id }} .work-item__description {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+
+  .featured-work-{{ section.id }} .work-item__link {
+    display: inline-flex;
+    align-items: center;
+    color: white;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+  }
+
+  .featured-work-{{ section.id }} .work-item__link::after {
+    content: '→';
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+  }
+
+  .featured-work-{{ section.id }} .work-item__link:hover::after {
+    transform: translateX(5px);
+  }
+
+  .featured-work-{{ section.id }} .work__cta {
+    text-align: center;
+    margin-top: 4rem;
+  }
+
+  .featured-work-{{ section.id }} .work__cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: transparent;
+    border: 2px solid rgb(var(--color-base-text));
+    color: rgb(var(--color-base-text));
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    border-radius: 0.5rem;
+  }
+
+  .featured-work-{{ section.id }} .work__cta-button:hover {
+    background: rgb(var(--color-base-text));
+    color: rgb(var(--color-base-background-1));
+  }
+
+  @media screen and (max-width: 749px) {
+    .featured-work-{{ section.id }} .work__header {
+      margin-bottom: 4rem;
+    }
+
+    .featured-work-{{ section.id }} .work__grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .featured-work-{{ section.id }} .work-item {
+      min-height: 300px;
+    }
+
+    .featured-work-{{ section.id }} .work-item__overlay {
+      opacity: 1;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        transparent 100%
+      );
+    }
+
+    .featured-work-{{ section.id }} .work__cta {
+      margin-top: 3rem;
+    }
+  }
+{%- endstyle -%}
+
+<div class="featured-work-{{ section.id }} color-{{ section.settings.section_color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
+      <div class="work__header">
+        {%- if section.settings.title != blank -%}
+          <h2 class="work__title inline-richtext">
+            {{ section.settings.title }}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.subtitle != blank -%}
+          <div class="work__subtitle rte">
+            {{ section.settings.subtitle }}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="work__grid">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'work_item' -%}
+              <div class="work-item" {{ block.shopify_attributes }}>
+                {%- if block.settings.image != blank -%}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 800 }}"
+                    alt="{{ block.settings.image.alt | escape }}"
+                    class="work-item__image"
+                    loading="lazy"
+                    width="{{ block.settings.image.width }}"
+                    height="{{ block.settings.image.height }}"
+                  >
+                {%- else -%}
+                  <div class="work-item__image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                {%- endif -%}
+                
+                <div class="work-item__overlay">
+                  {%- if block.settings.category != blank -%}
+                    <div class="work-item__category">
+                      {{ block.settings.category | escape }}
+                    </div>
+                  {%- endif -%}
+                  
+                  {%- if block.settings.title != blank -%}
+                    <h3 class="work-item__title">
+                      {{ block.settings.title | escape }}
+                    </h3>
+                  {%- endif -%}
+                  
+                  {%- if block.settings.description != blank -%}
+                    <div class="work-item__description">
+                      {{ block.settings.description | escape }}
+                    </div>
+                  {%- endif -%}
+                  
+                  {%- if block.settings.link_url != blank -%}
+                    <a href="{{ block.settings.link_url }}" class="work-item__link">
+                      {{ block.settings.link_label | default: 'View Project' | escape }}
+                    </a>
+                  {%- endif -%}
+                </div>
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.cta_label != blank and section.settings.cta_url != blank -%}
+      <div class="work__cta">
+        <a href="{{ section.settings.cta_url }}" class="work__cta-button">
+          {{ section.settings.cta_label | escape }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Work",
+  "tag": "section",
+  "class": "featured-work",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Featured Work"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Section Subheading",
+      "default": "Showcasing our latest projects and success stories"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Section Description",
+      "info": "Optional additional content below subheading"
+    },
+    {
+      "type": "header",
+      "content": "Call to Action"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Button Text",
+      "default": "View All Projects"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Button Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "cta_new_tab",
+      "label": "Open CTA in new tab",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "select",
+      "id": "grid_layout",
+      "label": "Grid Layout",
+      "options": [
+        {
+          "value": "masonry",
+          "label": "Masonry (Pinterest-style)"
+        },
+        {
+          "value": "uniform",
+          "label": "Uniform Grid"
+        },
+        {
+          "value": "featured",
+          "label": "Featured + Grid"
+        }
+      ],
+      "default": "uniform"
+    },
+    {
+      "type": "select",
+      "id": "grid_columns_desktop",
+      "label": "Desktop Columns",
+      "options": [
+        {
+          "value": "2",
+          "label": "2 Columns"
+        },
+        {
+          "value": "3",
+          "label": "3 Columns"
+        },
+        {
+          "value": "4",
+          "label": "4 Columns"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "select",
+      "id": "grid_columns_mobile",
+      "label": "Mobile Columns",
+      "options": [
+        {
+          "value": "1",
+          "label": "1 Column"
+        },
+        {
+          "value": "2",
+          "label": "2 Columns"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid Gap",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Image Aspect Ratio",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape (4:3)"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "wide",
+          "label": "Wide (16:9)"
+        },
+        {
+          "value": "auto",
+          "label": "Auto (Original)"
+        }
+      ],
+      "default": "landscape"
+    },
+    {
+      "type": "header",
+      "content": "Overlay Settings"
+    },
+    {
+      "type": "select",
+      "id": "overlay_style",
+      "label": "Overlay Style",
+      "options": [
+        {
+          "value": "gradient",
+          "label": "Gradient Overlay"
+        },
+        {
+          "value": "solid",
+          "label": "Solid Color"
+        },
+        {
+          "value": "blur",
+          "label": "Blur Effect"
+        },
+        {
+          "value": "none",
+          "label": "No Overlay"
+        }
+      ],
+      "default": "gradient"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 60,
+      "unit": "%"
+    },
+    {
+      "type": "select",
+      "id": "overlay_position",
+      "label": "Overlay Position",
+      "options": [
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "full",
+          "label": "Full Coverage"
+        }
+      ],
+      "default": "bottom"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "project_title_color",
+      "label": "Project Title Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "project_description_color",
+      "label": "Project Description Color",
+      "default": "rgba(255, 255, 255, 0.9)"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Animation & Effects"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_hover_effects",
+      "label": "Enable Hover Effects",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "hover_effect",
+      "label": "Hover Effect",
+      "options": [
+        {
+          "value": "zoom",
+          "label": "Zoom In"
+        },
+        {
+          "value": "scale",
+          "label": "Scale Up"
+        },
+        {
+          "value": "slide",
+          "label": "Slide Up"
+        },
+        {
+          "value": "fade",
+          "label": "Fade"
+        }
+      ],
+      "default": "scale"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animations",
+      "label": "Enable Scroll Animations",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "animation_style",
+      "label": "Animation Style",
+      "options": [
+        {
+          "value": "fade-up",
+          "label": "Fade Up"
+        },
+        {
+          "value": "fade-in",
+          "label": "Fade In"
+        },
+        {
+          "value": "scale-up",
+          "label": "Scale Up"
+        },
+        {
+          "value": "slide-up",
+          "label": "Slide Up"
+        }
+      ],
+      "default": "fade-up"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "section_background",
+      "label": "Section Background Color",
+      "default": "transparent"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "project",
+      "name": "Project",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Project Content"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Project Title",
+          "default": "Project Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Project Description",
+          "default": "Brief description of the project, highlighting key features and results achieved."
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Project Category",
+          "default": "Web Design",
+          "info": "e.g., Web Design, E-commerce, Branding"
+        },
+        {
+          "type": "text",
+          "id": "client",
+          "label": "Client Name",
+          "info": "Optional client name"
+        },
+        {
+          "type": "url",
+          "id": "project_link",
+          "label": "Project Link",
+          "info": "Link to project details or live site"
+        },
+        {
+          "type": "checkbox",
+          "id": "link_new_tab",
+          "label": "Open link in new tab",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Project Media"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Project Image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image Alt Text",
+          "info": "Describe the image for accessibility"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Project Video",
+          "info": "Optional video instead of image"
+        },
+        {
+          "type": "header",
+          "content": "Project Details"
+        },
+        {
+          "type": "text",
+          "id": "duration",
+          "label": "Project Duration",
+          "info": "e.g., 3 months, 6 weeks"
+        },
+        {
+          "type": "text",
+          "id": "technologies",
+          "label": "Technologies Used",
+          "info": "e.g., Shopify Plus, React, Node.js"
+        },
+        {
+          "type": "textarea",
+          "id": "results",
+          "label": "Key Results",
+          "info": "e.g., 150% increase in conversions, 40% faster load times"
+        },
+        {
+          "type": "header",
+          "content": "Custom Styling"
+        },
+        {
+          "type": "checkbox",
+          "id": "featured",
+          "label": "Featured Project",
+          "default": false,
+          "info": "Make this project larger/more prominent"
+        },
+        {
+          "type": "color",
+          "id": "custom_overlay_color",
+          "label": "Custom Overlay Color",
+          "info": "Leave empty to use section default"
+        },
+        {
+          "type": "color",
+          "id": "custom_text_color",
+          "label": "Custom Text Color",
+          "info": "Leave empty to use section default"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Work",
+      "settings": {
+        "heading": "Featured Work",
+        "subheading": "Showcasing our latest projects and success stories",
+        "grid_layout": "uniform",
+        "grid_columns_desktop": "2",
+        "aspect_ratio": "landscape",
+        "overlay_style": "gradient",
+        "enable_hover_effects": true,
+        "enable_animations": true
+      },
+      "blocks": [
+        {
+          "type": "project",
+          "settings": {
+            "title": "Fashion Brand Redesign",
+            "description": "Complete Shopify Plus migration and UX overhaul resulting in 150% conversion increase.",
+            "category": "E-commerce",
+            "client": "Fashion Brand",
+            "duration": "4 months",
+            "technologies": "Shopify Plus, React, Liquid",
+            "results": "150% increase in conversions, 40% faster load times"
+          }
+        },
+        {
+          "type": "project",
+          "settings": {
+            "title": "Manufacturing Portal",
+            "description": "Custom B2B portal with advanced inventory management and bulk ordering capabilities.",
+            "category": "B2B Platform",
+            "client": "Manufacturing Co.",
+            "duration": "6 months",
+            "technologies": "Shopify Plus, Custom Apps, API Integration",
+            "results": "300% increase in B2B orders, 60% reduction in manual processing"
+          }
+        },
+        {
+          "type": "project",
+          "settings": {
+            "title": "Multi-vendor Platform",
+            "description": "Scalable marketplace solution connecting vendors with customers across multiple regions.",
+            "category": "Marketplace",
+            "client": "Marketplace Inc.",
+            "duration": "8 months",
+            "technologies": "Shopify Plus, Multi-vendor Apps, Payment Gateways",
+            "results": "500+ active vendors, $2M+ in monthly transactions"
+          }
+        },
+        {
+          "type": "project",
+          "settings": {
+            "title": "Native Shopping App",
+            "description": "iOS and Android app with seamless Shopify integration and AR try-on features.",
+            "category": "Mobile App",
+            "client": "Tech Startup",
+            "duration": "5 months",
+            "technologies": "React Native, Shopify Mobile SDK, AR Kit",
+            "results": "200K+ downloads, 85% user retention rate"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

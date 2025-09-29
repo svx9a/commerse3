@@ -1,0 +1,1212 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .contact-cta-{{ section.id }} {
+    background: rgb(var(--color-base-background-1));
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-cta-{{ section.id }}::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(var(--color-base-text), 0.02) 0%,
+      transparent 50%,
+      rgba(var(--color-base-text), 0.02) 100%
+    );
+    pointer-events: none;
+  }
+
+  .contact-cta-{{ section.id }} .contact-cta__container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 80rem;
+    margin: 0 auto;
+  }
+
+  .contact-cta-{{ section.id }} .contact-cta__title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: rgb(var(--color-base-text));
+    line-height: 1.1;
+  }
+
+  .contact-cta-{{ section.id }} .contact-cta__subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: rgba(var(--color-base-text), 0.8);
+    margin-bottom: 3rem;
+    line-height: 1.5;
+    max-width: 60rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-cta-{{ section.id }} .contact-cta__buttons {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
+  }
+
+  .contact-cta-{{ section.id }} .contact-cta__button {
+    display: inline-flex;
+    align-items: center;
+    padding: 1.2rem 2.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-cta-{{ section.id }} .contact-cta__button--primary {
+    background: rgb(var(--color-base-text));
+    color: rgb(var(--color-base-background-1));
+    border: 2px solid rgb(var(--color-base-text));
+  }
+
+  .contact-cta-{{ section.id }} .contact-cta__button--primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(var(--color-base-background-1), 0.1);
+    transition: left 0.3s ease;
+  }
+
+  .contact-cta-{{ section.id }} .contact-cta__button--primary:hover::before {
+    left: 100%;
+  }
+
+  .contact-cta-{{ section.id }} .contact-cta__button--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(var(--color-base-text), 0.3);
+  }
+
+  .contact-cta-{{ section.id }} .contact-cta__button--secondary {
+    background: transparent;
+    color: rgb(var(--color-base-text));
+    border: 2px solid rgba(var(--color-base-text), 0.3);
+  }
+
+  .contact-cta-{{ section.id }} .contact-cta__button--secondary:hover {
+    background: rgba(var(--color-base-text), 0.05);
+    border-color: rgb(var(--color-base-text));
+    transform: translateY(-2px);
+  }
+
+  .contact-cta-{{ section.id }} .contact-cta__form {
+    max-width: 50rem;
+    margin: 0 auto;
+    background: rgba(var(--color-base-text), 0.02);
+    border: 1px solid rgba(var(--color-base-text), 0.1);
+    border-radius: 1rem;
+    padding: 3rem;
+  }
+
+  .contact-cta-{{ section.id }} .contact-cta__form-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: rgb(var(--color-base-text));
+    text-align: center;
+  }
+
+  .contact-cta-{{ section.id }} .contact-form {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .contact-cta-{{ section.id }} .contact-form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .contact-cta-{{ section.id }} .contact-form__field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-cta-{{ section.id }} .contact-form__label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: rgb(var(--color-base-text));
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .contact-cta-{{ section.id }} .contact-form__input,
+  .contact-cta-{{ section.id }} .contact-form__textarea {
+    padding: 1rem;
+    border: 1px solid rgba(var(--color-base-text), 0.2);
+    border-radius: 0.5rem;
+    background: rgb(var(--color-base-background-1));
+    color: rgb(var(--color-base-text));
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+
+  .contact-cta-{{ section.id }} .contact-form__input:focus,
+  .contact-cta-{{ section.id }} .contact-form__textarea:focus {
+    outline: none;
+    border-color: rgb(var(--color-base-text));
+  }
+
+  .contact-cta-{{ section.id }} .contact-form__textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  .contact-cta-{{ section.id }} .contact-form__submit {
+    padding: 1.2rem 2rem;
+    background: rgb(var(--color-base-text));
+    color: rgb(var(--color-base-background-1));
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    justify-self: center;
+    min-width: 200px;
+  }
+
+  .contact-cta-{{ section.id }} .contact-form__submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(var(--color-base-text), 0.3);
+  }
+
+  .contact-cta-{{ section.id }} .contact-cta__info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+    padding-top: 4rem;
+    border-top: 1px solid rgba(var(--color-base-text), 0.1);
+  }
+
+  .contact-cta-{{ section.id }} .contact-info__item {
+    text-align: center;
+  }
+
+  .contact-cta-{{ section.id }} .contact-info__icon {
+    width: 3rem;
+    height: 3rem;
+    margin: 0 auto 1rem;
+    background: rgba(var(--color-base-text), 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+
+  .contact-cta-{{ section.id }} .contact-info__title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: rgb(var(--color-base-text));
+  }
+
+  .contact-cta-{{ section.id }} .contact-info__text {
+    color: rgba(var(--color-base-text), 0.7);
+    line-height: 1.5;
+  }
+
+  @media screen and (max-width: 749px) {
+    .contact-cta-{{ section.id }} .contact-cta__buttons {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-cta-{{ section.id }} .contact-cta__button {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .contact-cta-{{ section.id }} .contact-cta__form {
+      padding: 2rem;
+    }
+
+    .contact-cta-{{ section.id }} .contact-form__row {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-cta-{{ section.id }} .contact-cta__info {
+      grid-template-columns: 1fr;
+      margin-top: 3rem;
+      padding-top: 3rem;
+    }
+  }
+{%- endstyle -%}
+
+<div class="contact-cta-{{ section.id }} color-{{ section.settings.section_color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="contact-cta__container">
+      {%- if section.settings.title != blank -%}
+        <h2 class="contact-cta__title inline-richtext">
+          {{ section.settings.title }}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.subtitle != blank -%}
+        <div class="contact-cta__subtitle rte">
+          {{ section.settings.subtitle }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.primary_button_label != blank or section.settings.secondary_button_label != blank -%}
+        <div class="contact-cta__buttons">
+          {%- if section.settings.primary_button_label != blank -%}
+            <a href="{{ section.settings.primary_button_url | default: '#contact-form' }}" class="contact-cta__button contact-cta__button--primary">
+              {{ section.settings.primary_button_label | escape }}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.secondary_button_label != blank -%}
+            <a href="{{ section.settings.secondary_button_url }}" class="contact-cta__button contact-cta__button--secondary">
+              {{ section.settings.secondary_button_label | escape }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.show_form -%}
+        <div class="contact-cta__form" id="contact-form">
+          <h3 class="contact-cta__form-title">{{ section.settings.form_title | default: 'Get in Touch' | escape }}</h3>
+          
+          {% form 'contact' %}
+            <div class="contact-form">
+              <div class="contact-form__row">
+                <div class="contact-form__field">
+                  <label for="ContactForm-name" class="contact-form__label">Name *</label>
+                  <input
+                    class="contact-form__input"
+                    autocomplete="name"
+                    type="text"
+                    id="ContactForm-name"
+                    name="contact[name]"
+                    value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                    placeholder="Your name"
+                    required
+                  >
+                </div>
+                <div class="contact-form__field">
+                  <label for="ContactForm-email" class="contact-form__label">Email *</label>
+                  <input
+                    autocomplete="email"
+                    type="email"
+                    id="ContactForm-email"
+                    class="contact-form__input"
+                    name="contact[email]"
+                    spellcheck="false"
+                    autocapitalize="off"
+                    value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                    aria-required="true"
+                    placeholder="your@email.com"
+                    required
+                  >
+                </div>
+              </div>
+              
+              <div class="contact-form__field">
+                <label for="ContactForm-phone" class="contact-form__label">Phone</label>
+                <input
+                  type="tel"
+                  id="ContactForm-phone"
+                  class="contact-form__input"
+                  autocomplete="tel"
+                  name="contact[phone]"
+                  pattern="[0-9\-]*"
+                  value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+                  placeholder="+1 (555) 123-4567"
+                >
+              </div>
+              
+              <div class="contact-form__field">
+                <label for="ContactForm-body" class="contact-form__label">Message *</label>
+                <textarea
+                  rows="6"
+                  id="ContactForm-body"
+                  class="contact-form__textarea"
+                  name="contact[body]"
+                  placeholder="Tell us about your project..."
+                  required
+                >
+                  {%- if form.body -%}{{ form.body }}{%- endif -%}
+                </textarea>
+              </div>
+              
+              <button type="submit" class="contact-form__submit">
+                Send Message
+              </button>
+            </div>
+          {% endform %}
+        </div>
+      {%- endif -%}
+
+      {%- assign info_blocks = section.blocks | where: 'type', 'contact_info' -%}
+      {%- if info_blocks.size > 0 -%}
+        <div class="contact-cta__info">
+          {%- for block in info_blocks -%}
+            <div class="contact-info__item" {{ block.shopify_attributes }}>
+              {%- if block.settings.icon != blank -%}
+                <div class="contact-info__icon">
+                  {{ block.settings.icon }}
+                </div>
+              {%- endif -%}
+              {%- if block.settings.title != blank -%}
+                <h4 class="contact-info__title">
+                  {{ block.settings.title | escape }}
+                </h4>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <div class="contact-info__text">
+                  {{ block.settings.text | escape }}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Contact CTA",
+  "tag": "section",
+  "class": "contact-cta",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Ready to Get Started?"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Section Subheading",
+      "default": "Let's discuss your project and bring your vision to life"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Section Description",
+      "info": "Optional additional content below subheading"
+    },
+    {
+      "type": "header",
+      "content": "Call to Action Buttons"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "Primary Button Text",
+      "default": "Start Your Project"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "primary_button_new_tab",
+      "label": "Open primary button in new tab",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Secondary Button Text",
+      "default": "View Our Work"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "secondary_button_new_tab",
+      "label": "Open secondary button in new tab",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_button",
+      "label": "Show Secondary Button",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Contact Form"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_contact_form",
+      "label": "Show Contact Form",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "Form Heading",
+      "default": "Send us a message"
+    },
+    {
+      "type": "text",
+      "id": "form_submit_text",
+      "label": "Submit Button Text",
+      "default": "Send Message"
+    },
+    {
+      "type": "text",
+      "id": "form_success_message",
+      "label": "Success Message",
+      "default": "Thank you! We'll get back to you soon."
+    },
+    {
+      "type": "select",
+      "id": "form_layout",
+      "label": "Form Layout",
+      "options": [
+        {
+          "value": "inline",
+          "label": "Inline with Content"
+        },
+        {
+          "value": "below",
+          "label": "Below Content"
+        },
+        {
+          "value": "side",
+          "label": "Side by Side"
+        }
+      ],
+      "default": "below"
+    },
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "select",
+      "id": "section_layout",
+      "label": "Section Layout",
+      "options": [
+        {
+          "value": "centered",
+          "label": "Centered"
+        },
+        {
+          "value": "split",
+          "label": "Split Layout"
+        },
+        {
+          "value": "full-width",
+          "label": "Full Width"
+        }
+      ],
+      "default": "centered"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content Max Width",
+      "min": 400,
+      "max": 1200,
+      "step": 50,
+      "default": 800,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Background Settings"
+    },
+    {
+      "type": "select",
+      "id": "background_type",
+      "label": "Background Type",
+      "options": [
+        {
+          "value": "color",
+          "label": "Solid Color"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        },
+        {
+          "value": "image",
+          "label": "Background Image"
+        },
+        {
+          "value": "video",
+          "label": "Background Video"
+        }
+      ],
+      "default": "color"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f8f9fa"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background Gradient"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "video",
+      "id": "background_video",
+      "label": "Background Video"
+    },
+    {
+      "type": "select",
+      "id": "background_overlay",
+      "label": "Background Overlay",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "light",
+          "label": "Light Overlay"
+        },
+        {
+          "value": "dark",
+          "label": "Dark Overlay"
+        },
+        {
+          "value": "custom",
+          "label": "Custom Color"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay Color",
+      "default": "rgba(0, 0, 0, 0.5)"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading Size",
+      "min": 24,
+      "max": 72,
+      "step": 4,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading Size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Button Styling"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_bg",
+      "label": "Primary Button Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_text_color",
+      "label": "Primary Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_bg",
+      "label": "Secondary Button Background",
+      "default": "transparent"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_text_color",
+      "label": "Secondary Button Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_border",
+      "label": "Secondary Button Border Color",
+      "default": "#000000"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "options": [
+        {
+          "value": "rounded",
+          "label": "Rounded"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "pill",
+          "label": "Pill Shape"
+        }
+      ],
+      "default": "rounded"
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "label": "Button Size",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "header",
+      "content": "Form Styling"
+    },
+    {
+      "type": "color",
+      "id": "form_background",
+      "label": "Form Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "form_border_color",
+      "label": "Form Border Color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "input_background",
+      "label": "Input Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Input Border Color",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "input_text_color",
+      "label": "Input Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label Color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Animation & Effects"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animations",
+      "label": "Enable Scroll Animations",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "animation_style",
+      "label": "Animation Style",
+      "options": [
+        {
+          "value": "fade-up",
+          "label": "Fade Up"
+        },
+        {
+          "value": "fade-in",
+          "label": "Fade In"
+        },
+        {
+          "value": "scale-up",
+          "label": "Scale Up"
+        },
+        {
+          "value": "slide-up",
+          "label": "Slide Up"
+        }
+      ],
+      "default": "fade-up"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_hover_effects",
+      "label": "Enable Button Hover Effects",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "default": 100,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "default": 100,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top Margin",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom Margin",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 0,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "contact_info",
+      "name": "Contact Information",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Contact Details"
+        },
+        {
+          "type": "select",
+          "id": "info_type",
+          "label": "Information Type",
+          "options": [
+            {
+              "value": "email",
+              "label": "Email Address"
+            },
+            {
+              "value": "phone",
+              "label": "Phone Number"
+            },
+            {
+              "value": "address",
+              "label": "Physical Address"
+            },
+            {
+              "value": "hours",
+              "label": "Business Hours"
+            },
+            {
+              "value": "custom",
+              "label": "Custom Information"
+            }
+          ],
+          "default": "email"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Email",
+          "info": "e.g., Email, Phone, Address"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "hello@example.com",
+          "info": "The actual contact information"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link",
+          "info": "Optional link (e.g., mailto:, tel:, maps link)"
+        },
+        {
+          "type": "checkbox",
+          "id": "link_new_tab",
+          "label": "Open link in new tab",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "Icon Settings"
+        },
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon Type",
+          "options": [
+            {
+              "value": "none",
+              "label": "No Icon"
+            },
+            {
+              "value": "emoji",
+              "label": "Emoji"
+            },
+            {
+              "value": "svg",
+              "label": "SVG Code"
+            },
+            {
+              "value": "text",
+              "label": "Text Symbol"
+            }
+          ],
+          "default": "emoji"
+        },
+        {
+          "type": "text",
+          "id": "icon_emoji",
+          "label": "Emoji Icon",
+          "default": "📧",
+          "info": "Single emoji character"
+        },
+        {
+          "type": "textarea",
+          "id": "icon_svg",
+          "label": "SVG Icon Code",
+          "info": "Complete SVG code for custom icon"
+        },
+        {
+          "type": "text",
+          "id": "icon_text",
+          "label": "Text Symbol",
+          "default": "@",
+          "info": "Text character or symbol"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon Color",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "icon_size",
+          "label": "Icon Size",
+          "min": 16,
+          "max": 48,
+          "step": 2,
+          "default": 24,
+          "unit": "px"
+        },
+        {
+          "type": "header",
+          "content": "Custom Styling"
+        },
+        {
+          "type": "color",
+          "id": "custom_label_color",
+          "label": "Custom Label Color",
+          "info": "Leave empty to use section default"
+        },
+        {
+          "type": "color",
+          "id": "custom_value_color",
+          "label": "Custom Value Color",
+          "info": "Leave empty to use section default"
+        }
+      ]
+    },
+    {
+      "type": "form_field",
+      "name": "Form Field",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Field Settings"
+        },
+        {
+          "type": "select",
+          "id": "field_type",
+          "label": "Field Type",
+          "options": [
+            {
+              "value": "text",
+              "label": "Text Input"
+            },
+            {
+              "value": "email",
+              "label": "Email Input"
+            },
+            {
+              "value": "tel",
+              "label": "Phone Input"
+            },
+            {
+              "value": "textarea",
+              "label": "Text Area"
+            },
+            {
+              "value": "select",
+              "label": "Dropdown Select"
+            },
+            {
+              "value": "checkbox",
+              "label": "Checkbox"
+            },
+            {
+              "value": "radio",
+              "label": "Radio Buttons"
+            }
+          ],
+          "default": "text"
+        },
+        {
+          "type": "text",
+          "id": "field_name",
+          "label": "Field Name",
+          "default": "name",
+          "info": "Used for form submission (no spaces or special characters)"
+        },
+        {
+          "type": "text",
+          "id": "field_label",
+          "label": "Field Label",
+          "default": "Your Name",
+          "info": "Visible label for the field"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder Text",
+          "default": "Enter your name",
+          "info": "Placeholder text inside the field"
+        },
+        {
+          "type": "checkbox",
+          "id": "required",
+          "label": "Required Field",
+          "default": false
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options",
+          "info": "For select/radio/checkbox fields. One option per line.",
+          "default": "Option 1\nOption 2\nOption 3"
+        },
+        {
+          "type": "range",
+          "id": "field_width",
+          "label": "Field Width",
+          "min": 25,
+          "max": 100,
+          "step": 25,
+          "default": 100,
+          "unit": "%",
+          "info": "Width of the field (25%, 50%, 75%, 100%)"
+        },
+        {
+          "type": "header",
+          "content": "Validation"
+        },
+        {
+          "type": "text",
+          "id": "validation_message",
+          "label": "Validation Message",
+          "info": "Custom error message for invalid input"
+        },
+        {
+          "type": "text",
+          "id": "pattern",
+          "label": "Validation Pattern",
+          "info": "Regular expression for input validation"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact CTA",
+      "settings": {
+        "heading": "Ready to Get Started?",
+        "subheading": "Let's discuss your project and bring your vision to life",
+        "primary_button_text": "Start Your Project",
+        "secondary_button_text": "View Our Work",
+        "show_contact_form": false,
+        "section_layout": "centered",
+        "background_type": "color",
+        "background_color": "#f8f9fa",
+        "enable_animations": true
+      },
+      "blocks": [
+        {
+          "type": "contact_info",
+          "settings": {
+            "info_type": "email",
+            "label": "Email",
+            "value": "hello@example.com",
+            "link": "mailto:hello@example.com",
+            "icon_type": "emoji",
+            "icon_emoji": "📧"
+          }
+        },
+        {
+          "type": "contact_info",
+          "settings": {
+            "info_type": "phone",
+            "label": "Phone",
+            "value": "+1 (555) 123-4567",
+            "link": "tel:+15551234567",
+            "icon_type": "emoji",
+            "icon_emoji": "📞"
+          }
+        },
+        {
+          "type": "contact_info",
+          "settings": {
+            "info_type": "address",
+            "label": "Office",
+            "value": "123 Business St, City, State 12345",
+            "icon_type": "emoji",
+            "icon_emoji": "📍"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

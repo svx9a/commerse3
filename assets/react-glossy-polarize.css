@@ -1,0 +1,358 @@
+/* React Glossy Polarize Effects */
+/* Advanced Glass Morphism with Polarized Lighting */
+
+:root {
+  --polarize-primary: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.15) 0%, 
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(0, 0, 0, 0.02) 50%,
+    rgba(255, 255, 255, 0.08) 75%,
+    rgba(255, 255, 255, 0.12) 100%);
+  
+  --polarize-secondary: linear-gradient(45deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(200, 200, 255, 0.05) 30%,
+    rgba(255, 200, 200, 0.03) 70%,
+    rgba(255, 255, 255, 0.08) 100%);
+    
+  --polarize-accent: linear-gradient(90deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.15) 100%);
+    
+  --glass-blur: blur(20px);
+  --glass-blur-intense: blur(40px);
+  --polarize-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --polarize-glow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+/* Glossy Polarize Base Component */
+.glossy-polarize {
+  position: relative;
+  background: var(--polarize-primary);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-style: preserve-3d;
+}
+
+.glossy-polarize::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--polarize-accent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.glossy-polarize::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(255, 255, 255, 0.1) 45deg,
+    transparent 90deg,
+    rgba(255, 255, 255, 0.05) 135deg,
+    transparent 180deg,
+    rgba(255, 255, 255, 0.08) 225deg,
+    transparent 270deg,
+    rgba(255, 255, 255, 0.12) 315deg,
+    transparent 360deg
+  );
+  animation: polarize-rotate 8s linear infinite;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glossy-polarize:hover::before {
+  opacity: 1;
+}
+
+.glossy-polarize:hover::after {
+  opacity: 0.6;
+}
+
+.glossy-polarize:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: var(--polarize-shadow), var(--polarize-glow);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Polarize Card Component */
+.polarize-card {
+  @extend .glossy-polarize;
+  padding: 2rem;
+  margin: 1rem;
+  background: var(--polarize-secondary);
+  position: relative;
+  z-index: 2;
+}
+
+.polarize-card-content {
+  position: relative;
+  z-index: 3;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.polarize-card:hover {
+  transform: translateY(-8px) rotateX(5deg) rotateY(2deg);
+  box-shadow: 
+    var(--polarize-shadow),
+    var(--polarize-glow),
+    0 0 40px rgba(255, 255, 255, 0.05);
+}
+
+/* Glossy Button with Polarize Effect */
+.btn-glossy-polarize {
+  @extend .glossy-polarize;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+.btn-glossy-polarize .btn-text {
+  position: relative;
+  z-index: 4;
+  transition: all 0.3s ease;
+}
+
+.btn-glossy-polarize:hover .btn-text {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.btn-glossy-polarize:active {
+  transform: translateY(-3px) scale(0.98);
+}
+
+/* Polarize Input Fields */
+.input-glossy-polarize {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.input-glossy-polarize input,
+.input-glossy-polarize textarea {
+  width: 100%;
+  padding: 1.2rem 1.5rem;
+  background: var(--polarize-primary);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  z-index: 2;
+}
+
+.input-glossy-polarize input:focus,
+.input-glossy-polarize textarea:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 0 0 3px rgba(255, 255, 255, 0.1),
+    var(--polarize-shadow),
+    var(--polarize-glow);
+  background: var(--polarize-secondary);
+  transform: translateY(-2px);
+}
+
+/* Polarize Navigation */
+.nav-glossy-polarize {
+  @extend .glossy-polarize;
+  padding: 1rem 2rem;
+  margin: 1rem 0;
+  border-radius: 50px;
+  backdrop-filter: var(--glass-blur-intense);
+  -webkit-backdrop-filter: var(--glass-blur-intense);
+}
+
+.nav-glossy-polarize ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-glossy-polarize a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 3;
+}
+
+.nav-glossy-polarize a:hover {
+  color: rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Polarize Modal/Dialog */
+.modal-glossy-polarize {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modal-glossy-polarize.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content-polarize {
+  @extend .glossy-polarize;
+  max-width: 500px;
+  width: 90%;
+  padding: 2rem;
+  background: var(--polarize-secondary);
+  border-radius: 24px;
+  transform: scale(0.8) translateY(50px);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  z-index: 2;
+}
+
+.modal-glossy-polarize.active .modal-content-polarize {
+  transform: scale(1) translateY(0);
+}
+
+/* Polarize Progress Bar */
+.progress-glossy-polarize {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
+
+.progress-bar-polarize {
+  height: 100%;
+  background: var(--polarize-accent);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar-polarize::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%);
+  animation: progress-shine 2s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes polarize-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes progress-shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .glossy-polarize {
+    border-radius: 16px;
+  }
+  
+  .polarize-card {
+    padding: 1.5rem;
+    margin: 0.5rem;
+  }
+  
+  .btn-glossy-polarize {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .nav-glossy-polarize ul {
+    gap: 1rem;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .glossy-polarize,
+  .glossy-polarize::before,
+  .glossy-polarize::after,
+  .btn-glossy-polarize,
+  .input-glossy-polarize input,
+  .input-glossy-polarize textarea,
+  .modal-glossy-polarize,
+  .modal-content-polarize,
+  .progress-bar-polarize {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .glossy-polarize {
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background: rgba(0, 0, 0, 0.8);
+  }
+  
+  .polarize-card-content,
+  .btn-glossy-polarize .btn-text {
+    color: rgba(255, 255, 255, 1);
+  }
+}

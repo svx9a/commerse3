@@ -1,0 +1,1141 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "O2O Design",
+    "theme_version": "1.0.0",
+    "theme_author": "O2O Design Studio",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Global Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Primary Brand Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary Brand Color",
+        "default": "#000000",
+        "info": "Used for main buttons, links, and accents"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Secondary Brand Color",
+        "default": "#666666",
+        "info": "Used for secondary elements and subtle accents"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent Color",
+        "default": "#007bff",
+        "info": "Used for highlights and call-to-action elements"
+      },
+      {
+        "type": "header",
+        "content": "Background Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_background_primary",
+        "label": "Primary Background",
+        "default": "#ffffff",
+        "info": "Main page background color"
+      },
+      {
+        "type": "color",
+        "id": "color_background_secondary",
+        "label": "Secondary Background",
+        "default": "#f8f9fa",
+        "info": "Used for sections and cards"
+      },
+      {
+        "type": "color",
+        "id": "color_background_tertiary",
+        "label": "Tertiary Background",
+        "default": "#e9ecef",
+        "info": "Used for subtle backgrounds and dividers"
+      },
+      {
+        "type": "header",
+        "content": "Text Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_text_primary",
+        "label": "Primary Text Color",
+        "default": "#000000",
+        "info": "Main text color for headings and important content"
+      },
+      {
+        "type": "color",
+        "id": "color_text_secondary",
+        "label": "Secondary Text Color",
+        "default": "#666666",
+        "info": "Body text and secondary content"
+      },
+      {
+        "type": "color",
+        "id": "color_text_muted",
+        "label": "Muted Text Color",
+        "default": "#999999",
+        "info": "Subtle text, captions, and metadata"
+      },
+      {
+        "type": "color",
+        "id": "color_text_inverse",
+        "label": "Inverse Text Color",
+        "default": "#ffffff",
+        "info": "Text on dark backgrounds"
+      },
+      {
+        "type": "header",
+        "content": "Border & Outline Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_border_primary",
+        "label": "Primary Border Color",
+        "default": "#dee2e6",
+        "info": "Main borders and dividers"
+      },
+      {
+        "type": "color",
+        "id": "color_border_secondary",
+        "label": "Secondary Border Color",
+        "default": "#e9ecef",
+        "info": "Subtle borders and separators"
+      },
+      {
+        "type": "header",
+        "content": "Interactive Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_link",
+        "label": "Link Color",
+        "default": "#007bff",
+        "info": "Default link color"
+      },
+      {
+        "type": "color",
+        "id": "color_link_hover",
+        "label": "Link Hover Color",
+        "default": "#0056b3",
+        "info": "Link color on hover"
+      },
+      {
+        "type": "color",
+        "id": "color_success",
+        "label": "Success Color",
+        "default": "#28a745",
+        "info": "Success messages and positive actions"
+      },
+      {
+        "type": "color",
+        "id": "color_warning",
+        "label": "Warning Color",
+        "default": "#ffc107",
+        "info": "Warning messages and caution elements"
+      },
+      {
+        "type": "color",
+        "id": "color_error",
+        "label": "Error Color",
+        "default": "#dc3545",
+        "info": "Error messages and negative actions"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Font Families"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading Font",
+        "default": "helvetica_n4",
+        "info": "Font used for all headings (H1-H6)"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body Font",
+        "default": "helvetica_n4",
+        "info": "Font used for body text and paragraphs"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_accent",
+        "label": "Accent Font",
+        "default": "helvetica_n4",
+        "info": "Font used for special elements and highlights"
+      },
+      {
+        "type": "header",
+        "content": "Heading Sizes"
+      },
+      {
+        "type": "range",
+        "id": "font_size_h1",
+        "label": "H1 Font Size",
+        "min": 32,
+        "max": 80,
+        "step": 4,
+        "default": 48,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "font_size_h2",
+        "label": "H2 Font Size",
+        "min": 24,
+        "max": 64,
+        "step": 2,
+        "default": 36,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "font_size_h3",
+        "label": "H3 Font Size",
+        "min": 20,
+        "max": 48,
+        "step": 2,
+        "default": 28,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "font_size_h4",
+        "label": "H4 Font Size",
+        "min": 16,
+        "max": 36,
+        "step": 2,
+        "default": 24,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "font_size_h5",
+        "label": "H5 Font Size",
+        "min": 14,
+        "max": 28,
+        "step": 2,
+        "default": 20,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "font_size_h6",
+        "label": "H6 Font Size",
+        "min": 12,
+        "max": 24,
+        "step": 2,
+        "default": 16,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "Body Text Sizes"
+      },
+      {
+        "type": "range",
+        "id": "font_size_body",
+        "label": "Body Font Size",
+        "min": 12,
+        "max": 24,
+        "step": 1,
+        "default": 16,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "font_size_small",
+        "label": "Small Text Size",
+        "min": 10,
+        "max": 18,
+        "step": 1,
+        "default": 14,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "font_size_large",
+        "label": "Large Text Size",
+        "min": 16,
+        "max": 28,
+        "step": 1,
+        "default": 18,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "Font Weights"
+      },
+      {
+        "type": "select",
+        "id": "font_weight_heading",
+        "label": "Heading Font Weight",
+        "options": [
+          {
+            "value": "300",
+            "label": "Light (300)"
+          },
+          {
+            "value": "400",
+            "label": "Normal (400)"
+          },
+          {
+            "value": "500",
+            "label": "Medium (500)"
+          },
+          {
+            "value": "600",
+            "label": "Semi Bold (600)"
+          },
+          {
+            "value": "700",
+            "label": "Bold (700)"
+          },
+          {
+            "value": "800",
+            "label": "Extra Bold (800)"
+          }
+        ],
+        "default": "600"
+      },
+      {
+        "type": "select",
+        "id": "font_weight_body",
+        "label": "Body Font Weight",
+        "options": [
+          {
+            "value": "300",
+            "label": "Light (300)"
+          },
+          {
+            "value": "400",
+            "label": "Normal (400)"
+          },
+          {
+            "value": "500",
+            "label": "Medium (500)"
+          },
+          {
+            "value": "600",
+            "label": "Semi Bold (600)"
+          }
+        ],
+        "default": "400"
+      },
+      {
+        "type": "header",
+        "content": "Line Heights"
+      },
+      {
+        "type": "range",
+        "id": "line_height_heading",
+        "label": "Heading Line Height",
+        "min": 1.0,
+        "max": 2.0,
+        "step": 0.1,
+        "default": 1.2
+      },
+      {
+        "type": "range",
+        "id": "line_height_body",
+        "label": "Body Line Height",
+        "min": 1.2,
+        "max": 2.5,
+        "step": 0.1,
+        "default": 1.6
+      },
+      {
+        "type": "header",
+        "content": "Letter Spacing"
+      },
+      {
+        "type": "range",
+        "id": "letter_spacing_heading",
+        "label": "Heading Letter Spacing",
+        "min": -2,
+        "max": 4,
+        "step": 0.1,
+        "default": 0,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "letter_spacing_body",
+        "label": "Body Letter Spacing",
+        "min": -1,
+        "max": 2,
+        "step": 0.1,
+        "default": 0,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Layout & Spacing",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Container Settings"
+      },
+      {
+        "type": "range",
+        "id": "container_max_width",
+        "label": "Container Max Width",
+        "min": 1000,
+        "max": 1600,
+        "step": 50,
+        "default": 1200,
+        "unit": "px",
+        "info": "Maximum width for page content containers"
+      },
+      {
+        "type": "range",
+        "id": "container_padding",
+        "label": "Container Side Padding",
+        "min": 15,
+        "max": 60,
+        "step": 5,
+        "default": 20,
+        "unit": "px",
+        "info": "Horizontal padding inside containers"
+      },
+      {
+        "type": "header",
+        "content": "Section Spacing"
+      },
+      {
+        "type": "range",
+        "id": "section_spacing_small",
+        "label": "Small Section Spacing",
+        "min": 20,
+        "max": 80,
+        "step": 10,
+        "default": 40,
+        "unit": "px",
+        "info": "Spacing for compact sections"
+      },
+      {
+        "type": "range",
+        "id": "section_spacing_medium",
+        "label": "Medium Section Spacing",
+        "min": 40,
+        "max": 120,
+        "step": 10,
+        "default": 80,
+        "unit": "px",
+        "info": "Standard section spacing"
+      },
+      {
+        "type": "range",
+        "id": "section_spacing_large",
+        "label": "Large Section Spacing",
+        "min": 80,
+        "max": 200,
+        "step": 10,
+        "default": 120,
+        "unit": "px",
+        "info": "Spacing for prominent sections"
+      },
+      {
+        "type": "header",
+        "content": "Element Spacing"
+      },
+      {
+        "type": "range",
+        "id": "element_spacing_small",
+        "label": "Small Element Spacing",
+        "min": 5,
+        "max": 30,
+        "step": 5,
+        "default": 10,
+        "unit": "px",
+        "info": "Spacing between small elements"
+      },
+      {
+        "type": "range",
+        "id": "element_spacing_medium",
+        "label": "Medium Element Spacing",
+        "min": 10,
+        "max": 50,
+        "step": 5,
+        "default": 20,
+        "unit": "px",
+        "info": "Standard element spacing"
+      },
+      {
+        "type": "range",
+        "id": "element_spacing_large",
+        "label": "Large Element Spacing",
+        "min": 20,
+        "max": 80,
+        "step": 5,
+        "default": 40,
+        "unit": "px",
+        "info": "Spacing between large elements"
+      },
+      {
+        "type": "header",
+        "content": "Grid Settings"
+      },
+      {
+        "type": "range",
+        "id": "grid_gutter",
+        "label": "Grid Gutter Width",
+        "min": 10,
+        "max": 60,
+        "step": 5,
+        "default": 30,
+        "unit": "px",
+        "info": "Space between grid columns"
+      },
+      {
+        "type": "select",
+        "id": "grid_columns_desktop",
+        "label": "Desktop Grid Columns",
+        "options": [
+          {
+            "value": "2",
+            "label": "2 Columns"
+          },
+          {
+            "value": "3",
+            "label": "3 Columns"
+          },
+          {
+            "value": "4",
+            "label": "4 Columns"
+          },
+          {
+            "value": "5",
+            "label": "5 Columns"
+          },
+          {
+            "value": "6",
+            "label": "6 Columns"
+          }
+        ],
+        "default": "3",
+        "info": "Default number of columns for desktop grids"
+      },
+      {
+        "type": "select",
+        "id": "grid_columns_tablet",
+        "label": "Tablet Grid Columns",
+        "options": [
+          {
+            "value": "1",
+            "label": "1 Column"
+          },
+          {
+            "value": "2",
+            "label": "2 Columns"
+          },
+          {
+            "value": "3",
+            "label": "3 Columns"
+          }
+        ],
+        "default": "2",
+        "info": "Default number of columns for tablet grids"
+      },
+      {
+        "type": "select",
+        "id": "grid_columns_mobile",
+        "label": "Mobile Grid Columns",
+        "options": [
+          {
+            "value": "1",
+            "label": "1 Column"
+          },
+          {
+            "value": "2",
+            "label": "2 Columns"
+          }
+        ],
+        "default": "1",
+        "info": "Default number of columns for mobile grids"
+      }
+    ]
+  },
+  {
+    "name": "Buttons & Forms",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Button Styling"
+      },
+      {
+        "type": "select",
+        "id": "button_style",
+        "label": "Default Button Style",
+        "options": [
+          {
+            "value": "rounded",
+            "label": "Rounded Corners"
+          },
+          {
+            "value": "square",
+            "label": "Square Corners"
+          },
+          {
+            "value": "pill",
+            "label": "Pill Shape"
+          }
+        ],
+        "default": "rounded"
+      },
+      {
+        "type": "range",
+        "id": "button_border_radius",
+        "label": "Button Border Radius",
+        "min": 0,
+        "max": 50,
+        "step": 2,
+        "default": 6,
+        "unit": "px",
+        "info": "Only applies to rounded button style"
+      },
+      {
+        "type": "range",
+        "id": "button_padding_horizontal",
+        "label": "Button Horizontal Padding",
+        "min": 15,
+        "max": 60,
+        "step": 5,
+        "default": 30,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "button_padding_vertical",
+        "label": "Button Vertical Padding",
+        "min": 8,
+        "max": 25,
+        "step": 2,
+        "default": 12,
+        "unit": "px"
+      },
+      {
+        "type": "select",
+        "id": "button_font_weight",
+        "label": "Button Font Weight",
+        "options": [
+          {
+            "value": "400",
+            "label": "Normal (400)"
+          },
+          {
+            "value": "500",
+            "label": "Medium (500)"
+          },
+          {
+            "value": "600",
+            "label": "Semi Bold (600)"
+          },
+          {
+            "value": "700",
+            "label": "Bold (700)"
+          }
+        ],
+        "default": "500"
+      },
+      {
+        "type": "checkbox",
+        "id": "button_uppercase",
+        "label": "Uppercase Button Text",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "button_letter_spacing",
+        "label": "Button Letter Spacing",
+        "min": 0,
+        "max": 3,
+        "step": 0.1,
+        "default": 0.5,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "Form Styling"
+      },
+      {
+        "type": "range",
+        "id": "input_border_radius",
+        "label": "Input Border Radius",
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "default": 4,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "input_padding_horizontal",
+        "label": "Input Horizontal Padding",
+        "min": 10,
+        "max": 30,
+        "step": 2,
+        "default": 16,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "input_padding_vertical",
+        "label": "Input Vertical Padding",
+        "min": 8,
+        "max": 20,
+        "step": 2,
+        "default": 12,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "input_border_width",
+        "label": "Input Border Width",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "default": 1,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Animation & Effects",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Global Animation Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_animations",
+        "label": "Enable Animations",
+        "default": true,
+        "info": "Master toggle for all animations on the site"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_scroll_animations",
+        "label": "Enable Scroll Animations",
+        "default": true,
+        "info": "Animations that trigger when elements come into view"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_hover_effects",
+        "label": "Enable Hover Effects",
+        "default": true,
+        "info": "Interactive hover effects on buttons and links"
+      },
+      {
+        "type": "header",
+        "content": "Animation Timing"
+      },
+      {
+        "type": "range",
+        "id": "animation_duration_fast",
+        "label": "Fast Animation Duration",
+        "min": 100,
+        "max": 500,
+        "step": 50,
+        "default": 200,
+        "unit": "ms",
+        "info": "Duration for quick transitions"
+      },
+      {
+        "type": "range",
+        "id": "animation_duration_normal",
+        "label": "Normal Animation Duration",
+        "min": 200,
+        "max": 800,
+        "step": 50,
+        "default": 400,
+        "unit": "ms",
+        "info": "Duration for standard animations"
+      },
+      {
+        "type": "range",
+        "id": "animation_duration_slow",
+        "label": "Slow Animation Duration",
+        "min": 500,
+        "max": 1500,
+        "step": 100,
+        "default": 800,
+        "unit": "ms",
+        "info": "Duration for dramatic animations"
+      },
+      {
+        "type": "header",
+        "content": "Scroll Animation Settings"
+      },
+      {
+        "type": "select",
+        "id": "scroll_animation_default",
+        "label": "Default Scroll Animation",
+        "options": [
+          {
+            "value": "fade-up",
+            "label": "Fade Up"
+          },
+          {
+            "value": "fade-in",
+            "label": "Fade In"
+          },
+          {
+            "value": "scale-up",
+            "label": "Scale Up"
+          },
+          {
+            "value": "slide-up",
+            "label": "Slide Up"
+          },
+          {
+            "value": "slide-left",
+            "label": "Slide Left"
+          },
+          {
+            "value": "slide-right",
+            "label": "Slide Right"
+          }
+        ],
+        "default": "fade-up"
+      },
+      {
+        "type": "range",
+        "id": "scroll_animation_delay",
+        "label": "Animation Delay Between Elements",
+        "min": 0,
+        "max": 500,
+        "step": 50,
+        "default": 100,
+        "unit": "ms",
+        "info": "Stagger delay for multiple elements"
+      }
+    ]
+  },
+  {
+    "name": "Header & Navigation",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Header Layout"
+      },
+      {
+        "type": "select",
+        "id": "header_style",
+        "label": "Header Style",
+        "options": [
+          {
+            "value": "standard",
+            "label": "Standard Header"
+          },
+          {
+            "value": "centered",
+            "label": "Centered Header"
+          },
+          {
+            "value": "minimal",
+            "label": "Minimal Header"
+          }
+        ],
+        "default": "standard"
+      },
+      {
+        "type": "checkbox",
+        "id": "header_sticky",
+        "label": "Sticky Header",
+        "default": true,
+        "info": "Header stays at top when scrolling"
+      },
+      {
+        "type": "range",
+        "id": "header_height",
+        "label": "Header Height",
+        "min": 60,
+        "max": 120,
+        "step": 5,
+        "default": 80,
+        "unit": "px"
+      },
+      {
+        "type": "color",
+        "id": "header_background",
+        "label": "Header Background Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "header_text_color",
+        "label": "Header Text Color",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Logo Settings"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo Image"
+      },
+      {
+        "type": "range",
+        "id": "logo_max_width",
+        "label": "Logo Max Width",
+        "min": 80,
+        "max": 300,
+        "step": 10,
+        "default": 150,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "Navigation Settings"
+      },
+      {
+        "type": "select",
+        "id": "nav_alignment",
+        "label": "Navigation Alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "right"
+      },
+      {
+        "type": "range",
+        "id": "nav_font_size",
+        "label": "Navigation Font Size",
+        "min": 12,
+        "max": 20,
+        "step": 1,
+        "default": 16,
+        "unit": "px"
+      },
+      {
+        "type": "select",
+        "id": "nav_font_weight",
+        "label": "Navigation Font Weight",
+        "options": [
+          {
+            "value": "400",
+            "label": "Normal (400)"
+          },
+          {
+            "value": "500",
+            "label": "Medium (500)"
+          },
+          {
+            "value": "600",
+            "label": "Semi Bold (600)"
+          }
+        ],
+        "default": "500"
+      }
+    ]
+  },
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Footer Layout"
+      },
+      {
+        "type": "select",
+        "id": "footer_style",
+        "label": "Footer Style",
+        "options": [
+          {
+            "value": "standard",
+            "label": "Standard Footer"
+          },
+          {
+            "value": "minimal",
+            "label": "Minimal Footer"
+          },
+          {
+            "value": "centered",
+            "label": "Centered Footer"
+          }
+        ],
+        "default": "standard"
+      },
+      {
+        "type": "color",
+        "id": "footer_background",
+        "label": "Footer Background Color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "footer_text_color",
+        "label": "Footer Text Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "range",
+        "id": "footer_padding_top",
+        "label": "Footer Top Padding",
+        "min": 40,
+        "max": 120,
+        "step": 10,
+        "default": 80,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "footer_padding_bottom",
+        "label": "Footer Bottom Padding",
+        "min": 20,
+        "max": 80,
+        "step": 10,
+        "default": 40,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social Media Links"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter",
+        "label": "Twitter URL"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "social_linkedin",
+        "label": "LinkedIn URL"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube",
+        "label": "YouTube URL"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok",
+        "label": "TikTok URL"
+      },
+      {
+        "type": "url",
+        "id": "social_pinterest",
+        "label": "Pinterest URL"
+      },
+      {
+        "type": "url",
+        "id": "social_snapchat",
+        "label": "Snapchat URL"
+      },
+      {
+        "type": "header",
+        "content": "Social Media Display"
+      },
+      {
+        "type": "checkbox",
+        "id": "social_show_in_header",
+        "label": "Show Social Links in Header",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "social_show_in_footer",
+        "label": "Show Social Links in Footer",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "social_icon_style",
+        "label": "Social Icon Style",
+        "options": [
+          {
+            "value": "outline",
+            "label": "Outline Icons"
+          },
+          {
+            "value": "filled",
+            "label": "Filled Icons"
+          },
+          {
+            "value": "minimal",
+            "label": "Minimal Icons"
+          }
+        ],
+        "default": "outline"
+      },
+      {
+        "type": "range",
+        "id": "social_icon_size",
+        "label": "Social Icon Size",
+        "min": 16,
+        "max": 48,
+        "step": 2,
+        "default": 24,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Favicon Settings"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Upload a 32x32px PNG or ICO file"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon_large",
+        "label": "Large Favicon",
+        "info": "Upload a 192x192px PNG file for high-resolution displays"
+      }
+    ]
+  }
+]

@@ -1,0 +1,335 @@
+/* 3D Product Viewer Styles - O2O Theme Integration */
+/* Black & White Aesthetic with Luxury Interactions */
+
+.three-product-viewer {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(135deg, 
+    rgb(10, 10, 10) 0%, 
+    rgb(20, 20, 20) 50%, 
+    rgb(5, 5, 5) 100%);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.6),
+    0 8px 16px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.three-product-viewer:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.8),
+    0 12px 24px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Canvas Styling */
+.three-product-viewer canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: inherit;
+}
+
+/* Loading Indicator */
+.three-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-top: 3px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.three-loader p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* Error State */
+.three-error {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 20, 20, 0.95);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.three-error p {
+  margin: 0 0 20px 0;
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+.three-error button {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, rgb(60, 60, 60), rgb(40, 40, 40));
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.three-error button:hover {
+  background: linear-gradient(135deg, rgb(80, 80, 80), rgb(60, 60, 60));
+  transform: translateY(-2px);
+}
+
+/* Fallback State */
+.three-fallback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 15, 15, 0.95);
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.three-fallback p {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+}
+
+/* Controls Overlay */
+.three-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  padding: 12px 16px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  z-index: 5;
+}
+
+.three-product-viewer:hover .three-controls {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.three-control-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.three-control-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.three-control-btn.active {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Info Overlay */
+.three-info {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 5;
+}
+
+.three-product-viewer:hover .three-info {
+  opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .three-product-viewer {
+    height: 400px;
+    border-radius: 8px;
+  }
+  
+  .three-controls {
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+    padding: 10px 12px;
+  }
+  
+  .three-control-btn {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+  
+  .three-info {
+    top: 15px;
+    right: 15px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .three-product-viewer {
+    height: 300px;
+    border-radius: 6px;
+  }
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .three-loader p {
+    font-size: 14px;
+  }
+}
+
+/* Integration with Existing Magnetic Effects */
+.three-product-viewer.magnetic-element {
+  cursor: pointer;
+}
+
+.three-product-viewer.magnetic-element:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+/* Performance Optimizations */
+.three-product-viewer {
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.three-product-viewer canvas {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Accessibility */
+.three-product-viewer:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .three-product-viewer,
+  .three-controls,
+  .three-info,
+  .loading-spinner {
+    animation: none;
+    transition: none;
+  }
+  
+  .three-product-viewer:hover {
+    transform: none;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .three-product-viewer {
+    border: 2px solid white;
+  }
+  
+  .three-controls {
+    background: black;
+    border: 1px solid white;
+  }
+  
+  .three-control-btn {
+    background: white;
+    color: black;
+    border: 1px solid black;
+  }
+}
+
+/* Dark Mode Compatibility */
+@media (prefers-color-scheme: dark) {
+  .three-product-viewer {
+    background: linear-gradient(135deg, 
+      rgb(5, 5, 5) 0%, 
+      rgb(15, 15, 15) 50%, 
+      rgb(0, 0, 0) 100%);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .three-product-viewer {
+    background: white;
+    border: 2px solid black;
+  }
+  
+  .three-product-viewer::after {
+    content: "3D Product Viewer (Interactive content not available in print)";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    font-size: 14px;
+    text-align: center;
+  }
+}

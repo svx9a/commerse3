@@ -1,0 +1,604 @@
+{% comment %}
+  3D Product Showcase Section
+  Integrates with O2O Theme's Black & White Aesthetic
+  Features advanced 3D product visualization with Three.js
+{% endcomment %}
+
+<link rel="stylesheet" href="{{ 'three-viewer-styles.css' | asset_url }}">
+<script src="{{ 'three-product-viewer.js' | asset_url }}" defer></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .product-3d-showcase-{{ section.id }} {
+    background: linear-gradient(135deg, 
+      rgb(0, 0, 0) 0%, 
+      rgb(20, 20, 20) 50%, 
+      rgb(10, 10, 10) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-3d-showcase-{{ section.id }}::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 20%, 
+      rgba(255, 255, 255, 0.03) 0%, 
+      transparent 50%),
+    radial-gradient(circle at 70% 80%, 
+      rgba(255, 255, 255, 0.02) 0%, 
+      transparent 50%);
+    pointer-events: none;
+  }
+{%- endstyle -%}
+
+<div class="product-3d-showcase-{{ section.id }} section-{{ section.id }}-padding">
+  <div class="page-width">
+    
+    {% if section.settings.heading != blank %}
+      <div class="section-header text-center">
+        <h2 class="section-heading h1 scroll-reveal">
+          {{ section.settings.heading }}
+        </h2>
+        {% if section.settings.subheading != blank %}
+          <p class="section-subheading scroll-reveal">
+            {{ section.settings.subheading }}
+          </p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="product-3d-grid">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          
+          {% when '3d_product' %}
+            <div class="product-3d-item scroll-reveal magnetic-element" {{ block.shopify_attributes }}>
+              
+              {% if block.settings.product_title != blank %}
+                <h3 class="product-3d-title">{{ block.settings.product_title }}</h3>
+              {% endif %}
+              
+              <div class="three-product-viewer"
+                   data-model="{{ block.settings.model_file | asset_url }}"
+                   data-controls="{{ block.settings.enable_controls }}"
+                   data-auto-rotate="{{ block.settings.auto_rotate }}"
+                   data-background-color="{{ block.settings.background_color | default: '0x0a0a0a' }}">
+                
+                {% comment %} Fallback content for non-WebGL browsers {% endcomment %}
+                <div class="product-3d-fallback">
+                  {% if block.settings.fallback_image != blank %}
+                    <img src="{{ block.settings.fallback_image | image_url: width: 600 }}" 
+                         alt="{{ block.settings.product_title | escape }}"
+                         loading="lazy">
+                  {% else %}
+                    <div class="fallback-placeholder">
+                      <p>3D Model Preview</p>
+                      <p>{{ block.settings.product_title }}</p>
+                    </div>
+                  {% endif %}
+                </div>
+                
+              </div>
+              
+              {% if block.settings.product_description != blank %}
+                <div class="product-3d-description">
+                  {{ block.settings.product_description }}
+                </div>
+              {% endif %}
+              
+              {% if block.settings.cta_text != blank and block.settings.cta_url != blank %}
+                <div class="product-3d-cta">
+                  <a href="{{ block.settings.cta_url }}" 
+                     class="btn btn--primary magnetic-element">
+                    {{ block.settings.cta_text }}
+                  </a>
+                </div>
+              {% endif %}
+              
+            </div>
+            
+          {% when '3d_gallery' %}
+            <div class="product-3d-gallery scroll-reveal" {{ block.shopify_attributes }}>
+              
+              {% if block.settings.gallery_title != blank %}
+                <h3 class="gallery-title">{{ block.settings.gallery_title }}</h3>
+              {% endif %}
+              
+              <div class="gallery-grid">
+                {% for i in (1..6) %}
+                  {% assign model_setting = 'model_' | append: i %}
+                  {% assign title_setting = 'title_' | append: i %}
+                  {% assign image_setting = 'image_' | append: i %}
+                  
+                  {% if block.settings[model_setting] != blank %}
+                    <div class="gallery-item magnetic-element">
+                      <div class="three-product-viewer gallery-viewer"
+                           data-model="{{ block.settings[model_setting] | asset_url }}"
+                           data-controls="true"
+                           data-auto-rotate="true">
+                        
+                        {% if block.settings[image_setting] != blank %}
+                          <img src="{{ block.settings[image_setting] | image_url: width: 300 }}" 
+                               alt="{{ block.settings[title_setting] | escape }}"
+                               loading="lazy">
+                        {% endif %}
+                        
+                      </div>
+                      
+                      {% if block.settings[title_setting] != blank %}
+                        <p class="gallery-item-title">{{ block.settings[title_setting] }}</p>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+              
+            </div>
+            
+          {% when 'ar_experience' %}
+            <div class="ar-experience scroll-reveal" {{ block.shopify_attributes }}>
+              
+              {% if block.settings.ar_title != blank %}
+                <h3 class="ar-title">{{ block.settings.ar_title }}</h3>
+              {% endif %}
+              
+              <div class="ar-viewer-container">
+                <model-viewer
+                  src="{{ block.settings.ar_model | asset_url }}"
+                  alt="{{ block.settings.ar_title | escape }}"
+                  ar
+                  ar-modes="webxr scene-viewer quick-look"
+                  camera-controls
+                  poster="{{ block.settings.ar_poster | image_url: width: 600 }}"
+                  shadow-intensity="1"
+                  environment-image="neutral"
+                  exposure="0.5">
+                  
+                  <button class="ar-button btn btn--primary" slot="ar-button">
+                    {{ block.settings.ar_button_text | default: 'View in AR' }}
+                  </button>
+                  
+                </model-viewer>
+              </div>
+              
+              {% if block.settings.ar_description != blank %}
+                <div class="ar-description">
+                  {{ block.settings.ar_description }}
+                </div>
+              {% endif %}
+              
+            </div>
+            
+        {% endcase %}
+      {% endfor %}
+    </div>
+    
+  </div>
+</div>
+
+<style>
+  .section-header {
+    margin-bottom: 4rem;
+  }
+  
+  .section-heading {
+    color: white;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 1) 0%, 
+      rgba(200, 200, 200, 0.8) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .section-subheading {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  .product-3d-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+  
+  .product-3d-item {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .product-3d-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-10px);
+  }
+  
+  .product-3d-title {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .product-3d-description {
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 1.5rem;
+    line-height: 1.6;
+  }
+  
+  .product-3d-cta {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  .product-3d-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: rgba(20, 20, 20, 0.8);
+    border-radius: 12px;
+  }
+  
+  .fallback-placeholder {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  .fallback-placeholder p:first-child {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+  
+  .gallery-item {
+    text-align: center;
+  }
+  
+  .gallery-viewer {
+    height: 300px;
+    margin-bottom: 1rem;
+  }
+  
+  .gallery-item-title {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+  
+  .ar-viewer-container {
+    height: 500px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  model-viewer {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 10, 10, 0.9);
+  }
+  
+  .ar-button {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .ar-description {
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 1.5rem;
+    text-align: center;
+    line-height: 1.6;
+  }
+  
+  @media (max-width: 768px) {
+    .product-3d-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    
+    .product-3d-item {
+      padding: 1.5rem;
+    }
+    
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .gallery-viewer {
+      height: 250px;
+    }
+    
+    .ar-viewer-container {
+      height: 400px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "3D Product Showcase",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Experience Our Products in 3D",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "default": "Explore our products with immersive 3D visualization and augmented reality",
+      "label": "Subheading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "3d_product",
+      "name": "3D Product",
+      "settings": [
+        {
+          "type": "text",
+          "id": "product_title",
+          "label": "Product Title",
+          "default": "Featured Product"
+        },
+        {
+          "type": "file_picker",
+          "id": "model_file",
+          "label": "3D Model File (.glb or .gltf)",
+          "accept": ".glb,.gltf"
+        },
+        {
+          "type": "image_picker",
+          "id": "fallback_image",
+          "label": "Fallback Image"
+        },
+        {
+          "type": "textarea",
+          "id": "product_description",
+          "label": "Product Description"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_controls",
+          "label": "Enable 3D Controls",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "auto_rotate",
+          "label": "Auto Rotate",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background Color",
+          "default": "#0a0a0a"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "Call to Action Text",
+          "default": "View Product"
+        },
+        {
+          "type": "url",
+          "id": "cta_url",
+          "label": "Call to Action URL"
+        }
+      ]
+    },
+    {
+      "type": "3d_gallery",
+      "name": "3D Gallery",
+      "settings": [
+        {
+          "type": "text",
+          "id": "gallery_title",
+          "label": "Gallery Title",
+          "default": "Product Gallery"
+        },
+        {
+          "type": "file_picker",
+          "id": "model_1",
+          "label": "Model 1 (.glb or .gltf)",
+          "accept": ".glb,.gltf"
+        },
+        {
+          "type": "text",
+          "id": "title_1",
+          "label": "Title 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Fallback Image 1"
+        },
+        {
+          "type": "file_picker",
+          "id": "model_2",
+          "label": "Model 2 (.glb or .gltf)",
+          "accept": ".glb,.gltf"
+        },
+        {
+          "type": "text",
+          "id": "title_2",
+          "label": "Title 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Fallback Image 2"
+        },
+        {
+          "type": "file_picker",
+          "id": "model_3",
+          "label": "Model 3 (.glb or .gltf)",
+          "accept": ".glb,.gltf"
+        },
+        {
+          "type": "text",
+          "id": "title_3",
+          "label": "Title 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Fallback Image 3"
+        },
+        {
+          "type": "file_picker",
+          "id": "model_4",
+          "label": "Model 4 (.glb or .gltf)",
+          "accept": ".glb,.gltf"
+        },
+        {
+          "type": "text",
+          "id": "title_4",
+          "label": "Title 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_4",
+          "label": "Fallback Image 4"
+        },
+        {
+          "type": "file_picker",
+          "id": "model_5",
+          "label": "Model 5 (.glb or .gltf)",
+          "accept": ".glb,.gltf"
+        },
+        {
+          "type": "text",
+          "id": "title_5",
+          "label": "Title 5"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_5",
+          "label": "Fallback Image 5"
+        },
+        {
+          "type": "file_picker",
+          "id": "model_6",
+          "label": "Model 6 (.glb or .gltf)",
+          "accept": ".glb,.gltf"
+        },
+        {
+          "type": "text",
+          "id": "title_6",
+          "label": "Title 6"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_6",
+          "label": "Fallback Image 6"
+        }
+      ]
+    },
+    {
+      "type": "ar_experience",
+      "name": "AR Experience",
+      "settings": [
+        {
+          "type": "text",
+          "id": "ar_title",
+          "label": "AR Experience Title",
+          "default": "View in Augmented Reality"
+        },
+        {
+          "type": "file_picker",
+          "id": "ar_model",
+          "label": "AR Model File (.glb)",
+          "accept": ".glb"
+        },
+        {
+          "type": "image_picker",
+          "id": "ar_poster",
+          "label": "AR Poster Image"
+        },
+        {
+          "type": "text",
+          "id": "ar_button_text",
+          "label": "AR Button Text",
+          "default": "View in AR"
+        },
+        {
+          "type": "textarea",
+          "id": "ar_description",
+          "label": "AR Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "3D Product Showcase",
+      "blocks": [
+        {
+          "type": "3d_product"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

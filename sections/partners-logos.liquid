@@ -1,0 +1,906 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .partners-{{ section.id }} {
+    background: rgb(var(--color-base-background-2));
+  }
+
+  .partners-{{ section.id }} .partners__header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .partners-{{ section.id }} .partners__title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: rgb(var(--color-base-text));
+  }
+
+  .partners-{{ section.id }} .partners__subtitle {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(var(--color-base-text), 0.7);
+    max-width: 50rem;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .partners-{{ section.id }} .partners__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .partners-{{ section.id }} .partner-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: rgba(var(--color-base-text), 0.02);
+    border: 1px solid rgba(var(--color-base-text), 0.05);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    min-height: 120px;
+  }
+
+  .partners-{{ section.id }} .partner-logo:hover {
+    background: rgba(var(--color-base-text), 0.05);
+    border-color: rgba(var(--color-base-text), 0.1);
+    transform: translateY(-5px);
+  }
+
+  .partners-{{ section.id }} .partner-logo img {
+    max-width: 100%;
+    max-height: 60px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(100%) opacity(0.6);
+    transition: filter 0.3s ease;
+  }
+
+  .partners-{{ section.id }} .partner-logo:hover img {
+    filter: grayscale(0%) opacity(1);
+  }
+
+  .partners-{{ section.id }} .partner-logo__text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: rgba(var(--color-base-text), 0.6);
+    text-align: center;
+    transition: color 0.3s ease;
+  }
+
+  .partners-{{ section.id }} .partner-logo:hover .partner-logo__text {
+    color: rgb(var(--color-base-text));
+  }
+
+  .partners-{{ section.id }} .partners__marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .partners-{{ section.id }} .partners__marquee-content {
+    display: inline-flex;
+    align-items: center;
+    animation: marquee 30s linear infinite;
+    gap: 4rem;
+  }
+
+  .partners-{{ section.id }} .partners__marquee .partner-logo {
+    flex-shrink: 0;
+    min-width: 200px;
+    background: transparent;
+    border: none;
+    padding: 1rem;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .partners-{{ section.id }} .partners__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+    padding-top: 4rem;
+    border-top: 1px solid rgba(var(--color-base-text), 0.1);
+  }
+
+  .partners-{{ section.id }} .stat-item {
+    text-align: center;
+  }
+
+  .partners-{{ section.id }} .stat-item__number {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: rgb(var(--color-base-text));
+    margin-bottom: 0.5rem;
+    line-height: 1;
+  }
+
+  .partners-{{ section.id }} .stat-item__label {
+    font-size: 1rem;
+    color: rgba(var(--color-base-text), 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  @media screen and (max-width: 749px) {
+    .partners-{{ section.id }} .partners__header {
+      margin-bottom: 3rem;
+    }
+
+    .partners-{{ section.id }} .partners__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .partners-{{ section.id }} .partner-logo {
+      padding: 1.5rem;
+      min-height: 100px;
+    }
+
+    .partners-{{ section.id }} .partners__stats {
+      grid-template-columns: repeat(2, 1fr);
+      margin-top: 3rem;
+      padding-top: 3rem;
+    }
+
+    .partners-{{ section.id }} .partners__marquee-content {
+      gap: 2rem;
+    }
+  }
+{%- endstyle -%}
+
+<div class="partners-{{ section.id }} color-{{ section.settings.section_color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
+      <div class="partners__header">
+        {%- if section.settings.title != blank -%}
+          <h2 class="partners__title inline-richtext">
+            {{ section.settings.title }}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.subtitle != blank -%}
+          <div class="partners__subtitle rte">
+            {{ section.settings.subtitle }}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      {%- if section.settings.layout == 'marquee' -%}
+        <div class="partners__marquee">
+          <div class="partners__marquee-content">
+            {%- for block in section.blocks -%}
+              {%- for i in (1..2) -%}
+                {%- case block.type -%}
+                  {%- when 'partner' -%}
+                    <div class="partner-logo" {{ block.shopify_attributes }}>
+                      {%- if block.settings.logo != blank -%}
+                        <img
+                          src="{{ block.settings.logo | image_url: width: 200 }}"
+                          alt="{{ block.settings.logo.alt | default: block.settings.name | escape }}"
+                          loading="lazy"
+                          width="{{ block.settings.logo.width }}"
+                          height="{{ block.settings.logo.height }}"
+                        >
+                      {%- elsif block.settings.name != blank -%}
+                        <div class="partner-logo__text">
+                          {{ block.settings.name | escape }}
+                        </div>
+                      {%- endif -%}
+                    </div>
+                {%- endcase -%}
+              {%- endfor -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- else -%}
+        <div class="partners__grid">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'partner' -%}
+                <div class="partner-logo" {{ block.shopify_attributes }}>
+                  {%- if block.settings.logo != blank -%}
+                    <img
+                      src="{{ block.settings.logo | image_url: width: 200 }}"
+                      alt="{{ block.settings.logo.alt | default: block.settings.name | escape }}"
+                      loading="lazy"
+                      width="{{ block.settings.logo.width }}"
+                      height="{{ block.settings.logo.height }}"
+                    >
+                  {%- elsif block.settings.name != blank -%}
+                    <div class="partner-logo__text">
+                      {{ block.settings.name | escape }}
+                    </div>
+                  {%- endif -%}
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- assign stats_blocks = section.blocks | where: 'type', 'stat' -%}
+    {%- if stats_blocks.size > 0 -%}
+      <div class="partners__stats">
+        {%- for block in stats_blocks -%}
+          <div class="stat-item" {{ block.shopify_attributes }}>
+            {%- if block.settings.number != blank -%}
+              <div class="stat-item__number">
+                {{ block.settings.number | escape }}
+              </div>
+            {%- endif -%}
+            {%- if block.settings.label != blank -%}
+              <div class="stat-item__label">
+                {{ block.settings.label | escape }}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Partners & Logos",
+  "tag": "section",
+  "class": "partners-logos",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Trusted Partners"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Section Subheading",
+      "default": "Working with industry leaders and innovative brands"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Section Description",
+      "info": "Optional additional content below subheading"
+    },
+    {
+      "type": "header",
+      "content": "Display Settings"
+    },
+    {
+      "type": "select",
+      "id": "display_style",
+      "label": "Display Style",
+      "options": [
+        {
+          "value": "grid",
+          "label": "Static Grid"
+        },
+        {
+          "value": "marquee",
+          "label": "Scrolling Marquee"
+        },
+        {
+          "value": "carousel",
+          "label": "Carousel Slider"
+        }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "select",
+      "id": "grid_columns_desktop",
+      "label": "Desktop Columns",
+      "options": [
+        {
+          "value": "3",
+          "label": "3 Columns"
+        },
+        {
+          "value": "4",
+          "label": "4 Columns"
+        },
+        {
+          "value": "5",
+          "label": "5 Columns"
+        },
+        {
+          "value": "6",
+          "label": "6 Columns"
+        }
+      ],
+      "default": "5"
+    },
+    {
+      "type": "select",
+      "id": "grid_columns_mobile",
+      "label": "Mobile Columns",
+      "options": [
+        {
+          "value": "2",
+          "label": "2 Columns"
+        },
+        {
+          "value": "3",
+          "label": "3 Columns"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "logo_max_height",
+      "label": "Logo Max Height",
+      "min": 40,
+      "max": 120,
+      "step": 10,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid Gap",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Logo Styling"
+    },
+    {
+      "type": "select",
+      "id": "logo_filter",
+      "label": "Logo Filter",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "grayscale",
+          "label": "Grayscale"
+        },
+        {
+          "value": "opacity",
+          "label": "Reduced Opacity"
+        },
+        {
+          "value": "grayscale-opacity",
+          "label": "Grayscale + Opacity"
+        }
+      ],
+      "default": "grayscale"
+    },
+    {
+      "type": "range",
+      "id": "logo_opacity",
+      "label": "Logo Opacity",
+      "min": 30,
+      "max": 100,
+      "step": 10,
+      "default": 70,
+      "unit": "%"
+    },
+    {
+      "type": "checkbox",
+      "id": "hover_effects",
+      "label": "Enable Hover Effects",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "hover_effect_type",
+      "label": "Hover Effect",
+      "options": [
+        {
+          "value": "scale",
+          "label": "Scale Up"
+        },
+        {
+          "value": "lift",
+          "label": "Lift Up"
+        },
+        {
+          "value": "glow",
+          "label": "Glow Effect"
+        },
+        {
+          "value": "rotate",
+          "label": "Slight Rotation"
+        }
+      ],
+      "default": "scale"
+    },
+    {
+      "type": "header",
+      "content": "Marquee Settings"
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "label": "Marquee Speed",
+      "min": 10,
+      "max": 100,
+      "step": 10,
+      "default": 30,
+      "unit": "s",
+      "info": "Animation duration in seconds (higher = slower)"
+    },
+    {
+      "type": "checkbox",
+      "id": "marquee_pause_hover",
+      "label": "Pause on Hover",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "marquee_direction",
+      "label": "Marquee Direction",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left to Right"
+        },
+        {
+          "value": "right",
+          "label": "Right to Left"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Statistics Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "label": "Show Statistics",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "stats_layout",
+      "label": "Statistics Layout",
+      "options": [
+        {
+          "value": "above",
+          "label": "Above Logos"
+        },
+        {
+          "value": "below",
+          "label": "Below Logos"
+        },
+        {
+          "value": "side",
+          "label": "Side by Side"
+        }
+      ],
+      "default": "above"
+    },
+    {
+      "type": "select",
+      "id": "stats_columns",
+      "label": "Statistics Columns",
+      "options": [
+        {
+          "value": "2",
+          "label": "2 Columns"
+        },
+        {
+          "value": "3",
+          "label": "3 Columns"
+        },
+        {
+          "value": "4",
+          "label": "4 Columns"
+        }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "stats_number_color",
+      "label": "Statistics Number Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "stats_label_color",
+      "label": "Statistics Label Color",
+      "default": "#666666"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Section Styling"
+    },
+    {
+      "type": "color",
+      "id": "section_background",
+      "label": "Section Background Color",
+      "default": "transparent"
+    },
+    {
+      "type": "color",
+      "id": "logo_background",
+      "label": "Logo Background Color",
+      "default": "transparent",
+      "info": "Background color for individual logo containers"
+    },
+    {
+      "type": "range",
+      "id": "logo_border_radius",
+      "label": "Logo Border Radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "default": 8,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "logo_border",
+      "label": "Show Logo Borders",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "logo_border_color",
+      "label": "Logo Border Color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "header",
+      "content": "Animation & Effects"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animations",
+      "label": "Enable Scroll Animations",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "animation_style",
+      "label": "Animation Style",
+      "options": [
+        {
+          "value": "fade-up",
+          "label": "Fade Up"
+        },
+        {
+          "value": "fade-in",
+          "label": "Fade In"
+        },
+        {
+          "value": "scale-up",
+          "label": "Scale Up"
+        },
+        {
+          "value": "slide-up",
+          "label": "Slide Up"
+        }
+      ],
+      "default": "fade-up"
+    },
+    {
+      "type": "range",
+      "id": "animation_delay",
+      "label": "Animation Delay Between Items",
+      "min": 0,
+      "max": 500,
+      "step": 50,
+      "default": 100,
+      "unit": "ms"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "partner_logo",
+      "name": "Partner Logo",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Logo Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Partner Logo"
+        },
+        {
+          "type": "text",
+          "id": "alt_text",
+          "label": "Logo Alt Text",
+          "info": "Describe the logo for accessibility"
+        },
+        {
+          "type": "text",
+          "id": "partner_name",
+          "label": "Partner Name",
+          "info": "Used for tooltip and accessibility"
+        },
+        {
+          "type": "url",
+          "id": "partner_link",
+          "label": "Partner Website",
+          "info": "Optional link to partner's website"
+        },
+        {
+          "type": "checkbox",
+          "id": "link_new_tab",
+          "label": "Open link in new tab",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Custom Styling"
+        },
+        {
+          "type": "range",
+          "id": "custom_height",
+          "label": "Custom Logo Height",
+          "min": 0,
+          "max": 120,
+          "step": 10,
+          "default": 0,
+          "unit": "px",
+          "info": "Leave at 0 to use section default"
+        },
+        {
+          "type": "color",
+          "id": "custom_background",
+          "label": "Custom Background Color",
+          "info": "Leave empty to use section default"
+        },
+        {
+          "type": "checkbox",
+          "id": "featured",
+          "label": "Featured Partner",
+          "default": false,
+          "info": "Make this logo larger/more prominent"
+        }
+      ]
+    },
+    {
+      "type": "statistic",
+      "name": "Statistic",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Statistic Content"
+        },
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "100+",
+          "info": "e.g., 100+, 5M, $2.5B"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Happy Clients",
+          "info": "e.g., Happy Clients, Projects Completed, Years Experience"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "info": "Optional additional context"
+        },
+        {
+          "type": "header",
+          "content": "Custom Styling"
+        },
+        {
+          "type": "color",
+          "id": "custom_number_color",
+          "label": "Custom Number Color",
+          "info": "Leave empty to use section default"
+        },
+        {
+          "type": "color",
+          "id": "custom_label_color",
+          "label": "Custom Label Color",
+          "info": "Leave empty to use section default"
+        },
+        {
+          "type": "select",
+          "id": "number_size",
+          "label": "Number Size",
+          "options": [
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value": "extra-large",
+              "label": "Extra Large"
+            }
+          ],
+          "default": "large"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Partners & Logos",
+      "settings": {
+        "heading": "Trusted Partners",
+        "subheading": "Working with industry leaders and innovative brands",
+        "display_style": "grid",
+        "grid_columns_desktop": "5",
+        "logo_filter": "grayscale",
+        "hover_effects": true,
+        "enable_animations": true
+      },
+      "blocks": [
+        {
+          "type": "partner_logo",
+          "settings": {
+            "partner_name": "Shopify Plus",
+            "alt_text": "Shopify Plus Partner Logo"
+          }
+        },
+        {
+          "type": "partner_logo",
+          "settings": {
+            "partner_name": "Google Cloud",
+            "alt_text": "Google Cloud Partner Logo"
+          }
+        },
+        {
+          "type": "partner_logo",
+          "settings": {
+            "partner_name": "AWS",
+            "alt_text": "Amazon Web Services Partner Logo"
+          }
+        },
+        {
+          "type": "partner_logo",
+          "settings": {
+            "partner_name": "Klaviyo",
+            "alt_text": "Klaviyo Partner Logo"
+          }
+        },
+        {
+          "type": "partner_logo",
+          "settings": {
+            "partner_name": "Yotpo",
+            "alt_text": "Yotpo Partner Logo"
+          }
+        },
+        {
+          "type": "statistic",
+          "settings": {
+            "number": "500+",
+            "label": "Projects Completed",
+            "description": "Successful e-commerce implementations"
+          }
+        },
+        {
+          "type": "statistic",
+          "settings": {
+            "number": "50M+",
+            "label": "Revenue Generated",
+            "description": "For our clients through optimization"
+          }
+        },
+        {
+          "type": "statistic",
+          "settings": {
+            "number": "99%",
+            "label": "Client Satisfaction",
+            "description": "Based on project completion surveys"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

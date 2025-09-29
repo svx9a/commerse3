@@ -1,0 +1,727 @@
+{% comment %}
+  Hero Banner Section with Liquid & 3D Background Effects
+  Luxurious navy aesthetic inspired by Trae.ai
+{% endcomment %}
+
+<link rel="stylesheet" href="{{ 'liquid-3d-effects.css' | asset_url }}">
+<script src="{{ 'scroll-animations.js' | asset_url }}" defer></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .hero-banner-{{ section.id }} {
+    min-height: {{ section.settings.desktop_content_position }}vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0a1628 0%, #1e3a5f 50%, #0f172a 100%);
+    transform-style: preserve-3d;
+  }
+
+  /* Liquid Background Container */
+  .hero-banner-{{ section.id }} .liquid-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  /* 3D Depth Layers */
+  .hero-banner-{{ section.id }} .depth-layer-1 {
+    background: linear-gradient(135deg, 
+      rgba(10, 22, 40, 0.95) 0%, 
+      rgba(30, 58, 95, 0.8) 50%, 
+      rgba(15, 23, 42, 0.9) 100%);
+  }
+
+  .hero-banner-{{ section.id }} .depth-layer-2 {
+    background: radial-gradient(ellipse at 30% 70%, 
+      rgba(255, 255, 255, 0.03) 0%, 
+      transparent 50%);
+    animation: depthPulse 8s ease-in-out infinite;
+  }
+
+  .hero-banner-{{ section.id }} .depth-layer-3 {
+    background: conic-gradient(from 45deg at 70% 30%, 
+      transparent 0deg, 
+      rgba(37, 99, 235, 0.08) 90deg, 
+      transparent 180deg, 
+      rgba(59, 130, 246, 0.06) 270deg, 
+      transparent 360deg);
+    animation: depthRotate 40s linear infinite;
+  }
+
+  /* Luxury Gradient Overlay */
+  .hero-banner-{{ section.id }} .luxury-gradient-overlay {
+    background: linear-gradient(
+      135deg,
+      rgba(15, 23, 42, 0.85) 0%,
+      rgba(30, 58, 95, 0.6) 25%,
+      rgba(37, 99, 235, 0.2) 50%,
+      rgba(59, 130, 246, 0.15) 75%,
+      rgba(147, 197, 253, 0.08) 100%
+    );
+  }
+
+  .hero-banner-{{ section.id }}::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero-banner-{{ section.id }} .hero__content {
+    position: relative;
+    z-index: 10;
+    text-align: {{ section.settings.desktop_content_alignment }};
+    max-width: 90rem;
+    padding: 0 2rem;
+    transform: translateZ(20px);
+  }
+
+  .hero-banner-{{ section.id }} .hero__title {
+    font-size: clamp(3rem, 8vw, {{ section.settings.heading_size }}rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, rgb(var(--color-base-text)) 0%, rgba(var(--color-base-text), 0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1s ease-out;
+  }
+
+  .hero-banner-{{ section.id }} .hero__subtitle {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    margin-bottom: 3rem;
+    color: rgba(var(--color-base-text), 0.8);
+    max-width: 60rem;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 1s ease-out 0.2s both;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes depthPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+  }
+
+  @keyframes depthRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .hero-banner-{{ section.id }} .hero__buttons {
+    display: flex;
+    gap: 2rem;
+    justify-content: {{ section.settings.desktop_content_alignment }};
+    flex-wrap: wrap;
+  }
+
+  @media screen and (max-width: 749px) {
+    .hero-banner-{{ section.id }} {
+      min-height: {{ section.settings.mobile_content_position }}vh;
+    }
+
+    .hero-banner-{{ section.id }} .hero__content {
+      text-align: {{ section.settings.mobile_content_alignment }};
+      padding: 0 1rem;
+    }
+
+    .hero-banner-{{ section.id }} .hero__buttons {
+      justify-content: {{ section.settings.mobile_content_alignment }};
+      flex-direction: column;
+      align-items: {{ section.settings.mobile_content_alignment }};
+    }
+  }
+
+  .hero-banner-{{ section.id }} .hero__media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .hero-banner-{{ section.id }} .hero__media img,
+  .hero-banner-{{ section.id }} .hero__media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
+  }
+
+  .hero-banner-{{ section.id }} .hero__media::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(var(--color-base-background-1), {{ section.settings.image_overlay_opacity | divided_by: 100.0 }});
+  }
+{%- endstyle -%}
+
+<div class="hero-banner-{{ section.id }} color-{{ section.settings.section_color_scheme }} gradient section-{{ section.id }}-padding">
+  <!-- Liquid Background Effects -->
+  <div class="liquid-background">
+    <div class="liquid-blob"></div>
+    <div class="liquid-blob"></div>
+    <div class="liquid-blob"></div>
+    <div class="liquid-blob"></div>
+  </div>
+
+  <!-- 3D Depth Layers -->
+  <div class="depth-layer depth-layer-1"></div>
+  <div class="depth-layer depth-layer-2"></div>
+  <div class="depth-layer depth-layer-3"></div>
+
+  <!-- Morphing Shapes -->
+  <div class="morphing-shape"></div>
+  <div class="morphing-shape"></div>
+
+  <!-- Particle System -->
+  <div class="particle-system">
+    {% for i in (1..20) %}
+      <div class="particle" style="left: {{ i | times: 5 }}%; animation-delay: {{ i | times: 0.5 }}s;"></div>
+    {% endfor %}
+  </div>
+
+  <!-- Luxury Gradient Overlay -->
+  <div class="luxury-gradient-overlay"></div>
+
+  {%- if section.settings.image != blank or section.settings.video != blank -%}
+    <div class="hero__media media">
+      {%- if section.settings.video != blank -%}
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          class="hero__video"
+        >
+          <source src="{{ section.settings.video | file_url }}" type="video/mp4">
+        </video>
+      {%- elsif section.settings.image != blank -%}
+        {%- liquid
+          assign image_height = section.settings.image.width | divided_by: section.settings.image.aspect_ratio
+          if section.settings.image_behavior == 'ambient'
+            assign sizes = '120vw'
+            assign widths = '450, 660, 900, 1320, 1800, 2376, 2880, 3360, 3840, 4320'
+          else
+            assign sizes = '100vw'
+            assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+          endif
+          assign fetch_priority = 'high'
+        -%}
+        {{
+          section.settings.image
+          | image_url: width: 3840
+          | image_tag:
+            width: section.settings.image.width,
+            height: image_height,
+            class: 'hero__image',
+            sizes: sizes,
+            widths: widths,
+            alt: section.settings.image.alt | escape,
+            loading: 'eager',
+            fetchpriority: fetch_priority
+        }}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="hero__content page-width glass-morphism glossy-card">
+    <div class="hero__text-wrapper">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'heading' -%}
+            <h1 class="hero__title inline-richtext {{ block.settings.heading_size }} scroll-reveal" {{ block.shopify_attributes }}>
+              {{ block.settings.heading }}
+            </h1>
+          {%- when 'text' -%}
+            <div class="hero__subtitle rte scroll-reveal" {{ block.shopify_attributes }}>
+              {{ block.settings.text }}
+            </div>
+          {%- when 'button' -%}
+            <div class="hero__buttons scroll-reveal" {{ block.shopify_attributes }}>
+              {%- if block.settings.button_label_1 != blank -%}
+                <a
+                  {% if block.settings.button_link_1 == blank %}
+                    role="link" aria-disabled="true"
+                  {% else %}
+                    href="{{ block.settings.button_link_1 }}"
+                  {% endif %}
+                  class="btn btn--primary interactive-element premium-glow glossy-button"
+                >
+                  {{ block.settings.button_label_1 | escape }}
+                </a>
+              {%- endif -%}
+              {%- if block.settings.button_label_2 != blank -%}
+                <a
+                  {% if block.settings.button_link_2 == blank %}
+                    role="link" aria-disabled="true"
+                  {% else %}
+                    href="{{ block.settings.button_link_2 }}"
+                  {% endif %}
+                  class="btn btn--secondary interactive-element glossy-button"
+                >
+                  {{ block.settings.button_label_2 | escape }}
+                </a>
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "tag": "section",
+  "class": "hero-banner",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background Media"
+    },
+    {
+      "type": "select",
+      "id": "background_type",
+      "label": "Background Type",
+      "options": [
+        {
+          "value": "image",
+          "label": "Image"
+        },
+        {
+          "value": "video",
+          "label": "Video"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        },
+        {
+          "value": "color",
+          "label": "Solid Color"
+        }
+      ],
+      "default": "gradient"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "file_picker",
+      "id": "video",
+      "label": "Background Video",
+      "accept": "video/*",
+      "info": "Video will take priority over image if both are selected"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background Gradient",
+      "default": "linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)"
+    },
+    {
+      "type": "header",
+      "content": "Overlay Settings"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Image overlay opacity",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Desktop height",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "mobile_content_position",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Mobile height",
+      "default": 80
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_position",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "Top left"
+        },
+        {
+          "value": "top-center",
+          "label": "Top center"
+        },
+        {
+          "value": "top-right",
+          "label": "Top right"
+        },
+        {
+          "value": "middle-left",
+          "label": "Middle left"
+        },
+        {
+          "value": "middle-center",
+          "label": "Middle center"
+        },
+        {
+          "value": "middle-right",
+          "label": "Middle right"
+        },
+        {
+          "value": "bottom-left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottom-center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "bottom-right",
+          "label": "Bottom right"
+        }
+      ],
+      "default": "middle-center",
+      "label": "Desktop content position"
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "label": "Desktop content alignment"
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "label": "Mobile content alignment"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content Width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "default": 80,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "section_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "unit": "rem",
+      "label": "Heading size",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Animation Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animations",
+      "label": "Enable Animations",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "animation_style",
+      "label": "Animation Style",
+      "options": [
+        {
+          "value": "fade-up",
+          "label": "Fade Up"
+        },
+        {
+          "value": "fade-in",
+          "label": "Fade In"
+        },
+        {
+          "value": "slide-left",
+          "label": "Slide Left"
+        },
+        {
+          "value": "slide-right",
+          "label": "Slide Right"
+        }
+      ],
+      "default": "fade-up"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "Bold ecommerce solutions for brands that dare to disrupt.",
+          "label": "Heading"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h2",
+              "label": "Small"
+            },
+            {
+              "value": "h1",
+              "label": "Medium"
+            },
+            {
+              "value": "h0",
+              "label": "Large"
+            }
+          ],
+          "default": "h1",
+          "label": "Heading size"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>With Shopify Plus at the heart of our tech stack, we pioneer industry-defining digital experiences that captivate ecommerce customers, drive conversions and shape the future of online retail.</p>",
+          "label": "Description"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label_1",
+          "default": "Our Services",
+          "label": "First button label",
+          "info": "Leave the label blank to hide the button."
+        },
+        {
+          "type": "url",
+          "id": "button_link_1",
+          "label": "First button link"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_1_new_tab",
+          "label": "Open in new tab",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "default": "View Portfolio",
+          "label": "Second button label",
+          "info": "Leave the label blank to hide the button."
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "Second button link"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_2_new_tab",
+          "label": "Open in new tab",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner",
+      "settings": {
+        "background_type": "gradient",
+        "enable_animations": true,
+        "animation_style": "fade-up"
+      },
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
