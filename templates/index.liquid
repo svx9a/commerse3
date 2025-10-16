@@ -1,12 +1,247 @@
-{% comment %} ALLVERSE Shopify Theme - templates/index.liquid {% endcomment %}
-{% render 'beae_header' %}
-<div class="allverse-enterprise">
-  {% section 'hero' %}
-  {% section 'contact-cta' %}
-  {% section 'trust-bar' %}
-  {% section 'workflow' %}
-  {% section 'features' %}
-  {% section 'pricing' %}
-</div>
-{% render 'beae_footer' %}
-{% render 'beae_ab_snippet' %}
+{% comment %} ALLVERSE Shopify Theme - index.liquid {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALLVERSE - Your Marketing Game Changer</title>
+    {{ 'https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap' | stylesheet_tag }}
+    {{ 'https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js' | script_tag }}
+    {{ 'https://code.tidio.co/YOUR_TIDIO_KEY.js' | script_tag | async: true }}
+    {{ 'https://sidekick.shopifycdn.com/widget.js' | script_tag | async: true | data-shop: shop.domain }}
+    {{ 'allverse.css' | asset_url | stylesheet_tag }}
+    {{ 'globe3d.js' | asset_url | script_tag }}
+</head>
+<body>
+    <div class="allverse-enterprise o2odesign-v2" data-section-id="allverse" id="allverse-section">
+        <!-- Hero Section -->
+        <section class="ae-hero">
+            <div id="aeCanvas" class="ae-hero__canvas o2d-canvas-allverse"></div>
+            <div class="ae-hero__content">
+                <div class="ae-hero__inner">
+                    <div class="ae-hero__badge" id="seo-badge">Hey, Check This Out!</div>
+                    <h1 class="ae-hero__title">ALLVERSE</h1>
+                    <div class="ae-hero__divider"></div>
+                    <p class="ae-hero__subtitle">Smart Marketing That Works</p>
+                    <p class="ae-hero__subtitle-sm">With a Dash of AI Magic</p>
+                    <div class="ae-hero__btns">
+                        <a href="{{ shop.url }}/pages/try-free" class="ae-btn ae-btn--primary">Try It Free</a>
+                        <a href="{{ shop.url }}/pages/demo" class="ae-btn ae-btn--secondary">See It in Action</a>
+                        <a href="#" id="xeta-pay" class="ae-btn ae-btn--white">Pay with THB Stablecoin</a>
+                    </div>
+                    <form id="klaviyo-form" class="ae-hero__form">
+                        <input type="email" placeholder="Enter your email" class="ae-hero__input" required>
+                        <button type="submit" class="ae-btn ae-btn--primary">Join the Cosmos</button>
+                    </form>
+                    <p id="xeta-discount" class="ae-hero__subtitle-sm" style="display: none;">Use code ALLVERSE10 for 10% off!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Bar -->
+        <section class="ae-trust">
+            <p class="ae-trust__label">Loved by 500+ Companies</p>
+            <div class="ae-trust__logos">
+                <div class="ae-trust__item"><span>🏢</span><span>TechCorp</span></div>
+                <div class="ae-trust__item"><span>📊</span><span>FinTechX</span></div>
+                <div class="ae-trust__item"><span>🔒</span><span>SecureNet</span></div>
+                <div class="ae-trust__item"><span>🚀</span><span>Innovate Inc</span></div>
+            </div>
+            <div id="relish-chat"></div>
+        </section>
+
+        <!-- Workflow -->
+        <section class="ae-workflow">
+            <div class="ae-workflow__header">
+                <div class="ae-badge">How It Works</div>
+                <h2 class="ae-h2">Easy Marketing <span class="ae-gradient">Smarts</span></h2>
+                <p class="ae-desc">We’ve got a simple three-step process to get your data humming and your business growing fast.</p>
+            </div>
+            <div class="ae-workflow__steps" id="workflow-steps">
+                <div class="ae-step" data-step="1">
+                    <div class="ae-step__num">1</div>
+                    <h3 class="ae-step__title">Data Smarts</h3>
+                    <p class="ae-step__desc">We pull all your data together with Alpha Sapphire tech—real-time and spot-on.</p>
+                    <div class="ae-step__metric">
+                        <div class="ae-metric__val" id="klaviyo-uptime">99.9%</div>
+                        <div class="ae-metric__label">Uptime Promise</div>
+                    </div>
+                    <div class="ae-step__features">
+                        <ul>
+                            <li>One Big Data Pool</li>
+                            <li>Instant Segmentation</li>
+                            <li>GDPR Friendly</li>
+                        </ul>
+                    </div>
+                    <button class="ae-step__toggle">Learn More →</button>
+                </div>
+                <div class="ae-step" data-step="2">
+                    <div class="ae-step__num">2</div>
+                    <h3 class="ae-step__title">AI Kickstart</h3>
+                    <p class="ae-step__desc">ECHTIC Emerald Taurus boosts campaigns with smart predictions and bid tweaks.</p>
+                    <div class="ae-step__metric">
+                        <div class="ae-metric__val" id="klaviyo-conversion">40%</div>
+                        <div class="ae-metric__label">Conversion Boost</div>
+                    </div>
+                    <div class="ae-step__features">
+                        <ul>
+                            <li>Smart Predictions</li>
+                            <li>Auto Bid Adjustments</li>
+                            <li>Fresh Content Ideas</li>
+                        </ul>
+                    </div>
+                    <button class="ae-step__toggle">Learn More →</button>
+                </div>
+                <div class="ae-step" data-step="3">
+                    <div class="ae-step__num">3</div>
+                    <h3 class="ae-step__title">Big Growth</h3>
+                    <p class="ae-step__desc">OMEGA Ruby Pulse scales globally with solid APIs and long-term data storage.</p>
+                    <div class="ae-step__metric">
+                        <div class="ae-metric__val" id="seo-checks">10M+</div>
+                        <div class="ae-metric__label">Daily Searches</div>
+                    </div>
+                    <div class="ae-step__features">
+                        <ul>
+                            <li>Global API Links</li>
+                            <li>Long-Term Data</li>
+                            <li>Top-Notch Security</li>
+                        </ul>
+                    </div>
+                    <button class="ae-step__toggle">Learn More →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features, Pricing, CTA, Footer -->
+        {{ content_for_index }}
+        <section class="ae-features">
+            <div class="ae-features__header">
+                <div class="ae-badge">What You Get</div>
+                <h2 class="ae-h2">Built for <span class="ae-gradient">Shopify</span></h2>
+            </div>
+            <div class="ae-features__grid">
+                <div class="ae-feature">
+                    <div class="ae-feature__icon">🛡️</div>
+                    <h3>Top Security</h3>
+                    <p>Rock-solid protection with the Gemini Seal—keeps all threats out.</p>
+                </div>
+                <div class="ae-feature">
+                    <div class="ae-feature__icon">🌐</div>
+                    <h3>Easy Connections</h3>
+                    <p>Links cloud, ledger, and physical stuff with Taurus protocol.</p>
+                </div>
+                <div class="ae-feature">
+                    <div class="ae-feature__icon">🧠</div>
+                    <h3>Smart Planning</h3>
+                    <p>Goes beyond guesses to set you up for long-term success.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="ae-pricing">
+            <div class="ae-pricing__header">
+                <div class="ae-badge">Pricing Options</div>
+                <h2 class="ae-h2">Plans That <span class="ae-gradient">Grow</span></h2>
+            </div>
+            <div class="ae-pricing__grid">
+                <div class="ae-plan">
+                    <h3>Professional</h3>
+                    <div class="ae-plan__price">$499</div>
+                    <ul>
+                        <li>10 Users</li>
+                        <li>1 Million Events/Mo</li>
+                        <li>Regular Support</li>
+                        <li>Dashboard Access</li>
+                    </ul>
+                    <a href="{{ shop.url }}/pages/professional" class="ae-btn ae-btn--primary">Give It a Go</a>
+                </div>
+                <div class="ae-plan ae-plan--popular">
+                    <div class="ae-plan__badge">Fan Favorite</div>
+                    <h3>Elite</h3>
+                    <div class="ae-plan__price">$1,999</div>
+                    <ul>
+                        <li>Unlimited Users</li>
+                        <li>Custom Event Scale</li>
+                        <li>Personal Account Manager</li>
+                        <li>99.99% Uptime</li>
+                    </ul>
+                    <a href="{{ shop.url }}/pages/elite" class="ae-btn ae-btn--primary">Talk to Us</a>
+                </div>
+                <div class="ae-plan">
+                    <h3>Sovereign</h3>
+                    <div class="ae-plan__price">Custom</div>
+                    <ul>
+                        <li>Global Reach</li>
+                        <li>Long-Term Data Lock</li>
+                        <li>Ruby Priority</li>
+                        <li>Dedicated Team</li>
+                    </ul>
+                    <a href="{{ shop.url }}/pages/sovereign" class="ae-btn ae-btn--primary">Get a Quote</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="ae-cta">
+            <h2>Ready to Jump In?</h2>
+            <p>Let’s kickstart your future with ALLVERSE. Hit us up anytime!</p>
+            <a href="{{ shop.url }}/pages/contact" class="ae-btn ae-btn--white">Get in Touch</a>
+        </section>
+
+        <footer class="ae-footer">
+            <div class="ae-footer__inner">
+                <div class="ae-footer__newsletter">
+                    <h3 class="ae-footer__title">Stay Ahead</h3>
+                    <p class="ae-footer__desc">Get AI-powered marketing tips and exclusive offers.</p>
+                    <form id="klaviyo-footer-form" class="ae-footer__form">
+                        <input type="email" placeholder="your@email.com" class="ae-footer__input" required>
+                        <button type="submit" class="ae-btn ae-btn--primary">Subscribe</button>
+                    </form>
+                </div>
+                <div class="ae-footer__links">
+                    <div class="ae-footer__col">
+                        <h4 class="ae-footer__col-title">ALLVERSE</h4>
+                        <ul>
+                            <li><a href="{{ shop.url }}/pages/about">About Us</a></li>
+                            <li><a href="{{ shop.url }}/pages/features">Features</a></li>
+                            <li><a href="{{ shop.url }}/pages/pricing">Pricing</a></li>
+                            <li><a href="{{ shop.url }}/pages/blog">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="ae-footer__col">
+                        <h4 class="ae-footer__col-title">Resources</h4>
+                        <ul>
+                            <li><a href="{{ shop.url }}/pages/help">Help Center</a></li>
+                            <li><a href="{{ shop.url }}/pages/tutorials">Tutorials</a></li>
+                            <li><a href="{{ shop.url }}/pages/api">API Docs</a></li>
+                            <li><a href="{{ shop.url }}/pages/status">Status</a></li>
+                        </ul>
+                    </div>
+                    <div class="ae-footer__col">
+                        <h4 class="ae-footer__col-title">Legal</h4>
+                        <ul>
+                            <li><a href="{{ shop.url }}/pages/privacy">Privacy Policy</a></li>
+                            <li><a href="{{ shop.url }}/pages/terms">Terms of Service</a></li>
+                            <li><a href="{{ shop.url }}/pages/cookies">Cookie Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ae-footer__social">
+                    <a href="#" aria-label="GitHub" target="_blank">💻</a>
+                    <a href="#" aria-label="Twitter" target="_blank">🐦</a>
+                    <a href="#" aria-label="LinkedIn" target="_blank">💼</a>
+                    <a href="#" aria-label="Facebook" target="_blank">📘</a>
+                    <a href="#" aria-label="Instagram" target="_blank">📷</a>
+                </div>
+                <div class="ae-footer__copyright">
+                    <p>© 2025 ALLVERSE. All rights reserved. |
+                        <a href="{{ shop.url }}/pages/privacy">Privacy</a> |
+                        <a href="{{ shop.url }}/pages/terms">Terms</a> |
+                        <a href="{{ shop.url }}/pages/cookies">Cookies</a>
+                    </p>
+                    <p>Made with <span style="color: var(--glossy-blue);">❤️</span> and AI</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
