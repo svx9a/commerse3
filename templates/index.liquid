@@ -1,9 +1,12 @@
-{% comment %}
-  The contents of the index.liquid template can be found in /sections/index.liquid
-{% endcomment %}
-
-{% section 'hero-banner' %}
-{% section 'services-grid' %}
-{% section 'featured-work' %}
-{% section 'partners-logos' %}
-{% section 'contact-cta' %}
+{% comment %} ALLVERSE Shopify Theme - templates/index.liquid {% endcomment %}
+{% render 'beae_header' %}
+<div class="allverse-enterprise">
+  {% section 'hero' %}
+  {% section 'contact-cta' %}
+  {% section 'trust-bar' %}
+  {% section 'workflow' %}
+  {% section 'features' %}
+  {% section 'pricing' %}
+</div>
+{% render 'beae_footer' %}
+{% render 'beae_ab_snippet' %}
